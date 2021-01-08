@@ -1,10 +1,10 @@
-# RIT-Rate-My-Professor-Extension
+# RIT Rate My Professor Extension
 
 [**Chrome** extension][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/lcionigofpcbfpmnipnioapimoggnbda.svg?label=%20">](https://chrome.google.com/webstore/detail/rate-my-professors-for-ri/lcionigofpcbfpmnipnioapimoggnbda?hl=en&authuser=0)
 
 [**Firefox** addon][link-firefox] [<img valign="middle" src="https://img.shields.io/amo/v/rate-my-professors-for-rit.svg?label=%20">][link-firefox]
 
-[Click here for the Multi-College version](https://github.com/CalvinWu4/Multi-College-Rate-My-Professor-Extension)
+[Click here for the version that works for any school](https://github.com/CalvinWu4/Any-School-Rate-My-Professor-Extension)
 
 This extension shows the [Rate My Professors](https://www.ratemyprofessors.com/) rating of professors while searching classes on [Tiger Center](https://tigercenter.rit.edu/tigerCenterApp/api/class-search).
 
