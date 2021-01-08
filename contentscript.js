@@ -37,7 +37,7 @@ selectors.forEach(selector => {
 });
 
 function GetProfessorRating(url, element, fullName, lastName, originalLastName, firstName, originalFirstName, middleNames, originalMiddleNames, 
-    runAgain, index, middleNamesRemovalStep, middleNameAsFirst, middleNamesString) {
+    runAgain, index, middleNamesRemovalStep, middleNameAsFirst, middleNamesString, triedMiddleNames=false) {
     chrome.runtime.sendMessage({ url: url }, function (response) {
         const resp = response.JSONresponse;
         const numFound = resp.response.numFound;
@@ -45,10 +45,11 @@ function GetProfessorRating(url, element, fullName, lastName, originalLastName, 
         // Add professor data if found
         if (numFound > 0 && doc) {
             // Use middle names in attempt to narrow down matches
-            if (numFound > 1 && middleNamesString === '') {
+            if (numFound > 1 && middleNamesString === '' && !triedMiddleNames) {
+                triedMiddleNames = true;
                 middleNamesString = middleNames.join('+');
                 GetProfessorRating(url, element, fullName, lastName, originalLastName, firstName, originalFirstName, middleNames, originalMiddleNames, 
-                    runAgain, index, middleNamesRemovalStep, middleNameAsFirst, middleNamesString);
+                    runAgain, index, middleNamesRemovalStep, middleNameAsFirst, middleNamesString, triedMiddleNames);
             }
             else {
                 const profID = doc.pk_id;
