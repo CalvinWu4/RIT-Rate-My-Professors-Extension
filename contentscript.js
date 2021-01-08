@@ -9,28 +9,31 @@ chrome.runtime.onMessage.addListener(function(message) {
 
 // Add professor ratings
 const urlBase = "https://search-production.ratemyprofessors.com/solr/rmp/select/?solrformat=true&rows=2&wt=json&q=";
-document.arrive('.col-xs-2 [href*="mailto:"]', function(){
-    const fullName = replaceCustomNicknames(this.textContent);
-    const splitName = fullName.split(' ');
-    const firstName = splitName[0].toLowerCase().trim();
-    const lastName = splitName.slice(-1)[0].toLowerCase().trim();
-    let middleNames = [];
-    let originalMiddleNames = [];
-    if (splitName.length > 2) {
-        middleNames = [...splitName.slice(1, splitName.length-1).map(name => name.toLowerCase().trim())];
-        originalMiddleNames = [...middleNames];
-    }
-    const middleNamesString = '';
-    url = urlBase + firstName + "+" + lastName + "+AND+schoolid_s%3A807"; // Try with no middle names at first
-    const runAgain = true;
-    const originalFirstName = firstName;
-    const originalLastName = lastName;
-    const index = 0;
-    const middleNamesRemovalStep = 0; // Track which middle name removal strategy we are on
-    const middleNameAsFirst = false;
-    // Query Rate My Professor with the professor's name
-    GetProfessorRating(url, this, fullName, lastName, originalLastName, firstName, originalFirstName, middleNames, originalMiddleNames, runAgain, 
-        index, middleNamesRemovalStep, middleNameAsFirst, middleNamesString);
+const selectors = ['[href*="mailto:"]', `[ng-bind-html='section.instructor | RMPUrl'] > a`];
+selectors.forEach(selector => {
+    document.arrive(selector, function(){
+        const fullName = replaceCustomNicknames(this.textContent);
+        const splitName = fullName.split(' ');
+        const firstName = splitName[0].toLowerCase().trim();
+        const lastName = splitName.slice(-1)[0].toLowerCase().trim();
+        let middleNames = [];
+        let originalMiddleNames = [];
+        if (splitName.length > 2) {
+            middleNames = [...splitName.slice(1, splitName.length-1).map(name => name.toLowerCase().trim())];
+            originalMiddleNames = [...middleNames];
+        }
+        const middleNamesString = '';
+        url = urlBase + firstName + "+" + lastName + "+AND+schoolid_s%3A807"; // Try with no middle names at first
+        const runAgain = true;
+        const originalFirstName = firstName;
+        const originalLastName = lastName;
+        const index = 0;
+        const middleNamesRemovalStep = 0; // Track which middle name removal strategy we are on
+        const middleNameAsFirst = false;
+        // Query Rate My Professor with the professor's name
+        GetProfessorRating(url, this, fullName, lastName, originalLastName, firstName, originalFirstName, middleNames, originalMiddleNames, runAgain, 
+            index, middleNamesRemovalStep, middleNameAsFirst, middleNamesString);
+    });
 });
 
 function GetProfessorRating(url, element, fullName, lastName, originalLastName, firstName, originalFirstName, middleNames, originalMiddleNames, 

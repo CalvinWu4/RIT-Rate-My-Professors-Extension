@@ -1,12 +1,12 @@
 {
-	"name" : "Rate My Professors for RIT Tiger Center",
+	"name" : "RIT Rate My Professors Extension",
 	"version" : "1.1.7",
 	"description" : "Shows the Rate My Professors rating of professors while searching classes on Tiger Center.",
 	"permissions": ["https://search-production.ratemyprofessors.com/*", "https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"],
 	"content_scripts": [ {
 		"css": [ "tooltipster/dist/css/tooltipster.main.min.css", "tooltip.css" ],
 		"js": [ "jquery-3.3.1.min.js", "addedNicknames.js", "arrive.min.js", "tooltipster/dist/js/tooltipster.bundle.min.js", "contentscript.js" ],
-		"matches": [ "https://tigercenter.rit.edu/tigerCenterApp/api/class-search*" ]
+		"matches": [ "https://tigercenter.rit.edu/tigerCenterApp/api/class-search*", "https://schedulemaker.csh.rit.edu/*" ]
 	  }],
 	"background": {
 		"scripts": ["node_modules/papaparse/papaparse.min.js", "background.js"],
