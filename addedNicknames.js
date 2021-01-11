@@ -1,5 +1,6 @@
 const customNames = {
-    "Thiagarajah Arujunan": "Al Arujunan"
+    "Thiagarajah Arujunan": "Al Arujunan",
+    "Abdulmutalib Masaud-Wahaishi": "Abdul Wahaishi"
 }
 
 function replaceCustomNicknames(fullName){
