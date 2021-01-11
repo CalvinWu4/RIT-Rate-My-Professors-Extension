@@ -142,7 +142,6 @@ function GetProfessorRating(url, element, fullName, lastName, originalLastName, 
                 const origMiddleNamesString = originalMiddleNames.join('+');
                 element.setAttribute('href', 
                 `https://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&queryoption=HEADER&query=${
-                    originalFirstName}+${originalMiddleNames.length > 0 ? origMiddleNamesString + '+': ''}${
                     originalLastName}&facetSearch=true&schoolName=rochester+institute+of+technology`);
                 element.setAttribute('target', '_blank');
             }
