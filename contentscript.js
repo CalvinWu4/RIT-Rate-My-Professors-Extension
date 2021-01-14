@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(message) {
 
 // Add professor ratings
 const urlBase = "https://search-production.ratemyprofessors.com/solr/rmp/select/?solrformat=true&rows=2&wt=json&q=";
-const selectors = ['[href*="mailto:"]', `[ng-bind-html='section.instructor | RMPUrl'] > a`];
+const selectors = ['.col-xs-2 [href*="mailto:"]', `[ng-bind-html='section.instructor | RMPUrl'] > a`];
 selectors.forEach(selector => {
     document.arrive(selector, function(){
         const fullName = replaceCustomNicknames(this.textContent);
@@ -138,8 +138,7 @@ function GetProfessorRating(url, element, fullName, lastName, originalLastName, 
             }
             // Set link to search results if not found
             else {
-                element.textContent += " (NF)";
-                const origMiddleNamesString = originalMiddleNames.join('+');
+                element.textContent = `${element.textContent} (NF)`;
                 element.setAttribute('href', 
                 `https://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&queryoption=HEADER&query=${
                     originalLastName}&facetSearch=true&schoolName=rochester+institute+of+technology`);
@@ -207,7 +206,9 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                     }
 
                     ratings.sort(function(a,b) { return new Date(b.rDate) - new Date(a.rDate) });
-                    ratings.sort(function(a,b) { return (b.helpCount - b.notHelpCount) - (a.helpCount - a.notHelpCount) });
+                    ratings.sort(function(a,b) {
+                        return (b.helpCount - b.notHelpCount) - (a.helpCount - a.notHelpCount);
+                    });
                     mostHelpfulReview = ratings[0];
                     helpCount = mostHelpfulReview.helpCount;
                     notHelpCount = mostHelpfulReview.notHelpCount;
@@ -218,7 +219,8 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                     div.appendChild(easyRatingText);
                     wouldTakeAgainText = document.createElement("p");
                     if (ratings.length >= 8 && wouldTakeAgainNACount < (ratings.length / 2)) {
-                        wouldTakeAgain = ((wouldTakeAgain / (ratings.length - wouldTakeAgainNACount)) * 100).toFixed(0).toString() + "%";
+                        wouldTakeAgain = ((wouldTakeAgain / (ratings.length - wouldTakeAgainNACount)) * 100).toFixed(0)
+                        .toString() + "%";
                     } else {
                         wouldTakeAgain = "N/A";
                     }
