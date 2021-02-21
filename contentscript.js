@@ -284,7 +284,7 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                                 content: div,
                                 contentAsHTML: true,
                                 maxWidth: 400,
-                                delay: 100
+                                delay: 500
                             })
                             .tooltipster('show');
                     }
