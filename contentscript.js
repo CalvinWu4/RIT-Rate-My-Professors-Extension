@@ -272,23 +272,16 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                     upvotesText.textContent = `👍${helpCount} 👎${notHelpCount}`;
                     div.appendChild(upvotesText);
                 }
-                element.class = "tooltip";
-                element.addEventListener("mouseenter", function () {
-                    // Only create tooltip once
-                    if (!$(element).hasClass('tooltipstered')) {
-                        $(this)
-                            .tooltipster({
-                                animation: 'grow',
-                                theme: 'tooltipster-default',
-                                side: 'right',
-                                content: div,
-                                contentAsHTML: true,
-                                maxWidth: 400,
-                                delay: 500
-                            })
-                            .tooltipster('show');
+                tippy(element, {
+                    theme: 'light',
+                    allowHTML: true,
+                    placement: 'right',
+                    delay: 500,
+                    onShow: function(instance) {
+                        instance.setContent(div);        
                     }
                 });
+        
             }
         });
     }
