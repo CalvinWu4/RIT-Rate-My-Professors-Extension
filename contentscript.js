@@ -1,11 +1,11 @@
 let nicknames = JSON.parse(localStorage.getItem("nicknames"));
 
-// Refresh nicknames and Airtable records from background fetch
+// Refresh nicknames from background fetch
 chrome.runtime.onMessage.addListener(function(message) {
     const fetchedNicknames = message.nicknames;
     localStorage.setItem("nicknames", JSON.stringify(fetchedNicknames));
     savedNicknames = JSON.parse(localStorage.getItem("nicknames"));
-    });
+});
 
 // Add professor ratings
 const urlBase = "https://search-production.ratemyprofessors.com/solr/rmp/select/?solrformat=true&rows=2&wt=json&q=";
@@ -66,6 +66,10 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
         const numFound = json.response.numFound;
         const docs = json.response.docs;
         let doc;
+
+        element.setAttribute('target', '_blank');
+        element.classList.add('blueText');
+        element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
         // Add professor data if found
         if (numFound > 0) {
             doc = docs[0];
@@ -80,7 +84,6 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
                 const profURL = "http://www.ratemyprofessors.com/ShowRatings.jsp?tid=" + profID;
                 element.textContent += ` (${profRating ? profRating : 'N/A'})`;
                 element.setAttribute('href', profURL);
-                element.setAttribute('target', '_blank');
 
                 let allprofRatingsURL = "https://www.ratemyprofessors.com/paginate/professors/ratings?tid=" + profID +
                 "&page=0&max=20";
@@ -140,7 +143,6 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
                 element.setAttribute('href', 
                 `https://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&queryoption=HEADER&query=${
                     originalLastName}&facetSearch=true&schoolName=${schoolName}`);
-                element.setAttribute('target', '_blank');
             }
         }        
     });
