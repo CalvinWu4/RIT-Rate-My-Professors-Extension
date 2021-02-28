@@ -9,7 +9,8 @@
 	"content_scripts": [{
 		"css": [
 			"node_modules/tippy.js/dist/tippy.css",
-			"node_modules/tippy.js/themes/light.css"
+			"node_modules/tippy.js/themes/light.css",
+			"prof-rating.css"
 		],
 		"js": [
 			"node_modules/arrive/minified/arrive.min.js",

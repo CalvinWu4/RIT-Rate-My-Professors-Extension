@@ -168,16 +168,20 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                 let easyRatingText;
 
                 const div = document.createElement("div");
-                const title = document.createElement("h3");
+                const title = document.createElement("div");
+                title.classList.add("prof-rating-title");
                 title.textContent = "Rate My Professor Details";
                 div.appendChild(title);
-                const professorText = document.createElement("p");
+                const professorText = document.createElement("div");
+                professorText.classList.add("prof-rating-text");
                 professorText.textContent = `${realFullName}, Professor in ${dept}`;
                 div.appendChild(professorText);
-                const avgRatingText = document.createElement("p");
+                const avgRatingText = document.createElement("div");
+                avgRatingText.classList.add("prof-rating-text");
                 avgRatingText.textContent = `Overall Quality: ${profRating ? profRating : 'N/A'}/5`
                 div.appendChild(avgRatingText);
-                const numRatingsText = document.createElement("p");
+                const numRatingsText = document.createElement("div");
+                numRatingsText.classList.add("prof-rating-text");
                 numRatingsText.textContent = `Number of Ratings: ${numRatings}`
                 div.appendChild(numRatingsText);
 
@@ -212,19 +216,22 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                     notHelpCount = mostHelpfulReview.notHelpCount;
 
                     const topTags = ([...tagFreqMap.entries()].sort((a, b) => a.count - b.count)).splice(0, 5);
-                    easyRatingText = document.createElement("p");
+                    easyRatingText = document.createElement("div");
+                    easyRatingText.classList.add("prof-rating-text");
                     easyRatingText.textContent = `Level of Difficulty: ${easyRating}`;
                     div.appendChild(easyRatingText);
-                    wouldTakeAgainText = document.createElement("p");
+                    wouldTakeAgainText = document.createElement("div");
+                    wouldTakeAgainText.classList.add("prof-rating-text");
                     if (ratings.length >= 8 && wouldTakeAgainNACount < (ratings.length / 2)) {
-                        wouldTakeAgain = ((wouldTakeAgain / (ratings.length - wouldTakeAgainNACount)) * 100).toFixed(0)
-                        .toString() + "%";
+                        wouldTakeAgain = `${((wouldTakeAgain / (ratings.length - wouldTakeAgainNACount)) * 100)
+                            .toFixed(0).toString()}%`;
                     } else {
                         wouldTakeAgain = "N/A";
                     }
                     wouldTakeAgainText.textContent = "Would take again: " + wouldTakeAgain;
                     div.appendChild(wouldTakeAgainText);
-                    const topTagsText = document.createElement("p");
+                    const topTagsText = document.createElement("div");
+                    topTagsText.classList.add("prof-rating-text");
                     topTagsText.textContent = "Top Tags: ";
                     if (topTags.length > 0) {
                         for (let i = 0; i < topTags.length; i++) {
@@ -236,29 +243,35 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                     div.appendChild(document.createElement("br"));
                 }
                 if (mostHelpfulReview) {
-                    const classText = document.createElement("p");
+                    const classText = document.createElement("div");
+                    classText.classList.add("prof-rating-text");
                     classText.textContent = "Most Helpful Rating: " + mostHelpfulReview.rClass + 
                     (mostHelpfulReview.onlineClass === "online" ? " (Online)" : "");  // Mark if class was online
                     div.appendChild(classText);
-                    const dateText = document.createElement("p");
+                    const dateText = document.createElement("div");
+                    dateText.classList.add("prof-rating-text");
                     dateText.textContent = mostHelpfulReview.rDate;
                     div.appendChild(dateText);
-                    const profRating = document.createElement("p");
+                    const profRating = document.createElement("div");
+                    profRating.classList.add("prof-rating-text");
                     profRating.textContent = "Overall Quality: " + mostHelpfulReview.rOverallString;
                     div.appendChild(profRating);
-                    const thisEasyRating = document.createElement("p");
+                    const thisEasyRating = document.createElement("div");
+                    thisEasyRating.classList.add("prof-rating-text");
                     thisEasyRating.textContent = "Level of Difficulty: " + mostHelpfulReview.rEasyString;
                     div.appendChild(thisEasyRating);
                     if (mostHelpfulReview.rWouldTakeAgain !== "N/A") {
-                        const thisWouldTakeAgain = document.createElement("p");
+                        const thisWouldTakeAgain = document.createElement("div");
+                        thisWouldTakeAgain.classList.add("prof-rating-text");
                         thisWouldTakeAgain.textContent = "Would take again: " + mostHelpfulReview.rWouldTakeAgain;
                         div.appendChild(thisWouldTakeAgain);
                     }
-                    const commentText = document.createElement("p");
+                    const commentText = document.createElement("div");
+                    commentText.classList.add("prof-rating-text");
                     commentText.textContent = mostHelpfulReview.rComments;
-                    commentText.classList.add('paragraph');
                     div.appendChild(commentText);
-                    const tagsText = document.createElement("p");
+                    const tagsText = document.createElement("div");
+                    tagsText.classList.add("prof-rating-text");
                     tagsText.textContent = "Tags: "
                     const tags = mostHelpfulReview.teacherRatingTags;
                     if (tags.length > 0) {
@@ -268,7 +281,8 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                         }
                         div.appendChild(tagsText);
                     }
-                    const upvotesText = document.createElement("p");
+                    const upvotesText = document.createElement("div");
+                    upvotesText.classList.add("prof-rating-text");
                     upvotesText.textContent = `👍${helpCount} 👎${notHelpCount}`;
                     div.appendChild(upvotesText);
                 }
@@ -276,7 +290,8 @@ function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRat
                     theme: 'light',
                     allowHTML: true,
                     placement: 'right',
-                    delay: 500,
+                    // show delay is 500ms, hide delay is 0ms
+                    delay: [500, 0],
                     onShow: function(instance) {
                         instance.setContent(div);        
                     }
