@@ -12,8 +12,6 @@ chrome.runtime.onMessage.addListener(
         return true;
     });
 
-let savedNicknames = JSON.parse(localStorage.getItem("nicknames"));
-
 // Save nicknames to localstorage
 function getNicknames(){
     fetch('https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv')
@@ -43,5 +41,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
     if (new Date().getTime() - new Date(retrievalDate).getTime() >= thirtydays) {
         getNicknames();
     }
-    chrome.tabs.sendMessage(tabId, {nicknames: savedNicknames}); // Send saved nicknames to content script
+    // Send saved nicknames to content script
+    chrome.tabs.sendMessage(tabId, { nicknames: JSON.parse(localStorage.getItem("nicknames")) });
 });

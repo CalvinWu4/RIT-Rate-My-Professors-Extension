@@ -1,10 +1,8 @@
-let nicknames = JSON.parse(localStorage.getItem("nicknames"));
+let nicknames;
 
-// Refresh nicknames from background fetch
+// Get nicknames from background localstorage
 chrome.runtime.onMessage.addListener(function(message) {
-    const fetchedNicknames = message.nicknames;
-    localStorage.setItem("nicknames", JSON.stringify(fetchedNicknames));
-    savedNicknames = JSON.parse(localStorage.getItem("nicknames"));
+    nicknames = message.nicknames;
 });
 
 // Add professor ratings
@@ -111,10 +109,10 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
                     middleAndLastNameCombosIndex, tryMiddleNameAsFirst, tryMiddleNames);
             }
             // Try again with nicknames for the first name
-            else if (tryNicknames && savedNicknames[originalFirstName]) {
-                firstName = savedNicknames[originalFirstName][nicknamesIndex];
+            else if (tryNicknames && nicknames[originalFirstName]) {
+                firstName = nicknames[originalFirstName][nicknamesIndex];
                 nicknamesIndex++;
-                tryNicknames = savedNicknames[originalFirstName][nicknamesIndex];
+                tryNicknames = nicknames[originalFirstName][nicknamesIndex];
                 if (!tryNicknames) {
                     restoreFirstName = true;
                 }
