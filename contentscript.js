@@ -59,8 +59,7 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
         restoreMiddleNames = false;
     }
 
-    chrome.runtime.sendMessage({ url: url }, function (response) {
-        const json = response.JSONresponse;
+    chrome.runtime.sendMessage(url, async function (json) { 
         const numFound = json.response.numFound;
         const docs = json.response.docs;
         let doc;
@@ -149,9 +148,9 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
 function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept) {
     let ratings = [];
     function getRatings(url){
-        chrome.runtime.sendMessage({ url: url }, function (response) { 
-            ratings = ratings.concat(response.JSONresponse.ratings);
-            var remaining = response.JSONresponse.remaining;
+        chrome.runtime.sendMessage(url, function (json) { 
+            ratings = ratings.concat(json.ratings);
+            var remaining = json.remaining;
             let pageNum = parseInt(new URLSearchParams(url).get('page'));
             if(remaining !== 0) { 
                 // Get all ratings by going through all the pages

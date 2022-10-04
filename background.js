@@ -1,16 +1,8 @@
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", request.url, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                sendResponse({ JSONresponse: JSON.parse(xhr.responseText) });
-            }
-        }
-        xhr.send();
-
-        return true;
-    });
+chrome.runtime.onMessage.addListener(function (url, sender, sendResponse) {
+    fetch(url).then((res) => res.json().then((json) => sendResponse(json)));
+    
+    return true;
+});
 
 // Save nicknames to localstorage
 function getNicknames(){
