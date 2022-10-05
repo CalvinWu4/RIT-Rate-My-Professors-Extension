@@ -10,7 +10,7 @@ const urlBase = "https://search-production.ratemyprofessors.com/solr/rmp/select/
 const selectors = ['.col-xs-2 [href*="mailto:"]', `[ng-bind-html='section.instructor | RMPUrl'] > a`];
 selectors.forEach(selector => {
     document.arrive(selector, function(){
-        const fullName = replaceCustomNicknames(this.textContent);
+        const fullName = replaceCustomNicknames(this.textContent.trim());
         const splitName = fullName.split(' ');
         const firstName = splitName[0].toLowerCase().trim();
         const lastName = splitName.slice(-1)[0].toLowerCase().trim();
