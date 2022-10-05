@@ -1,11 +1,14 @@
 {
 	"name" : "RIT Rate My Professors Extension",
-	"version" : "1.4.6",
+	"version" : "2.0.0",
 	"description" : "Shows the Rate My Professors rating of RIT professors while searching for classes on Tiger Center and CSH Schedule Maker.",
-	"permissions": [
+	"host_permissions": [
 		"https://search-production.ratemyprofessors.com/*",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
 	],
+	"permissions": [
+		"storage"
+	  ],	
 	"content_scripts": [{
 		"css": [
 			"node_modules/tippy.js/dist/tippy.css",
@@ -23,17 +26,16 @@
 		"matches": [
 			"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
 			"https://schedulemaker.csh.rit.edu/*"
-		]
-	  }],
-	"background": {
-		"scripts": [
-			"node_modules/papaparse/papaparse.min.js",
-			"background.js"
 		],
-		"persistent": false
-		},
-		"icons": { "16": "images/favicon.ico",
-			"48": "images/favicon.ico",
-		 "128": "images/favicon.ico" },
-	"manifest_version" : 2
+		"run_at": "document_end"
+		}],
+	"background": {
+		"service_worker": "bg-wrapper.js"
+	},
+	"icons": { 
+		"16": "images/favicon.ico",
+		"48": "images/favicon.ico",
+		"128": "images/favicon.ico" 
+	},
+	"manifest_version" : 3
 }

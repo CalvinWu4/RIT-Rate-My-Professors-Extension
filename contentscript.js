@@ -1,8 +1,7 @@
+// Get nicknames from chrome.storage.local set by background
 let nicknames;
-
-// Get nicknames from background localstorage
-chrome.runtime.onMessage.addListener(function(message) {
-    nicknames = message.nicknames;
+chrome.storage.local.get(['nicknames'], function(result) {
+    nicknames = result.nicknames;
 });
 
 // Add professor ratings
