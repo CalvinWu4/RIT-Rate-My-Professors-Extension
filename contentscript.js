@@ -62,6 +62,7 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
     chrome.runtime.sendMessage(url, async function (json) { 
         const numFound = json.response.numFound;
         const docs = json.response.docs;
+        const schoolId = 'U2Nob29sLTgwNw==';
         let doc;
 
         element.setAttribute('target', '_blank');
@@ -138,8 +139,7 @@ function GetProfessorRating(element, fullName, lastName, originalLastName, first
             else {
                 element.textContent = `${element.textContent} (NF)`;
                 element.setAttribute('href', 
-                `https://www.ratemyprofessors.com/search.jsp?queryBy=teacherName&queryoption=HEADER&query=${
-                    originalLastName}&facetSearch=true&schoolName=${schoolName}`);
+                `https://www.ratemyprofessors.com/search/teachers?query=${originalLastName}&sid=${schoolId}`);
             }
         }        
     });

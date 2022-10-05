@@ -1,6 +1,6 @@
 {
 	"name" : "RIT Rate My Professors Extension",
-	"version" : "1.4.4",
+	"version" : "1.4.6",
 	"description" : "Shows the Rate My Professors rating of RIT professors while searching for classes on Tiger Center and CSH Schedule Maker.",
 	"permissions": [
 		"https://search-production.ratemyprofessors.com/*",
