@@ -54,35 +54,19 @@ module.exports = {
 			patterns: [
 				{
 					from: SRC_DIR,
-					to: CHROME_DIR,
-					filter: async (resourcePath) => !resourcePath.endsWith('manifest.json'),
-				},
-				{
-					from: SRC_DIR,
-					to: FIREFOX_DIR,
+					to: BUILD_DIR,
 					filter: async (resourcePath) => !resourcePath.endsWith('manifest.json'),
 				},
 				{
 					from: manifestPath,
-					to: CHROME_DIR,
-					transform(content) {
-						return modify(content);
-					},
-				},
-				{
-					from: manifestPath,
-					to: FIREFOX_DIR,
+					to: BUILD_DIR,
 					transform(content) {
 						return modify(content);
 					},
 				},
 				{
 					from: IMG_DIR,
-					to: path.join(CHROME_DIR, 'images'),
-				},
-				{
-					from: IMG_DIR,
-					to: path.join(FIREFOX_DIR, 'images'),
+					to: path.join(BUILD_DIR, 'images'),
 				},
 			],
 		}),

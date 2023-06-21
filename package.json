@@ -26,12 +26,9 @@
     "build:manifest": "webpack --config webpack.config.js",
     "release": "./build.sh",
     "build": "NODE_ENV=development npm run build:manifest && ./build.sh keep-build",
-    "test": "npm run build && npm run test-all",
+    "test": "npm run build && web-ext lint --source-dir build/",
     "lint": "eslint src",
-    "lint-fix": "eslint src --fix",
-    "test-all": "npm run test-chrome && npm run test-ff",
-    "test-ff": "web-ext lint --source-dir build/firefox",
-    "test-chrome": "web-ext lint --source-dir build/chrome"
+    "lint-fix": "eslint src --fix"
   },
   "repository": {
     "type": "git",

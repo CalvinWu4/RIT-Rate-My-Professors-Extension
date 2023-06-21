@@ -3,8 +3,10 @@
 mkdir -p build
 mkdir -p dist
 
-cd build/chrome; zip -r ../../dist/chrome.zip *; cd ../..
-cd build/firefox; zip -r ../../dist/firefox.xpi *; cd ../..
+cd build;
+zip -r ../dist/chrome.zip *;
+zip -r ../dist/firefox.xpi *;
+cd ../
 
 if [ -z "$1" ]
   then
