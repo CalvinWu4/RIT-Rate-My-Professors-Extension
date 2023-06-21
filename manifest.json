@@ -3,7 +3,7 @@
 	"version" : "2.0.1",
 	"description" : "Shows the Rate My Professors rating of RIT professors while searching for classes on Tiger Center and CSH Schedule Maker.",
 	"host_permissions": [
-		"https://search-production.ratemyprofessors.com/*",
+		"https://ratemyprofessors.com/graphql",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
 	],
 	"permissions": [
