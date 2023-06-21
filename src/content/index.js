@@ -138,7 +138,7 @@ function GetProfessorRating(
 		restoreMiddleNames = false;
 	}
 
-	chrome.runtime.sendMessage(url, async (json) => {
+	browser.runtime.sendMessage(url, async (json) => {
 		const { numFound } = json.response;
 		const { docs } = json.response;
 		const schoolId = 'U2Nob29sLTgwNw==';
@@ -294,7 +294,7 @@ function GetProfessorRating(
 function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept) {
 	let ratings = [];
 	function getRatings(url) {
-		chrome.runtime.sendMessage(url, (json) => {
+		browser.runtime.sendMessage(url, (json) => {
 			ratings = ratings.concat(json.ratings);
 			const { remaining } = json;
 			const pageNum = parseInt(new URLSearchParams(url).get('page'));

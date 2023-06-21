@@ -1,6 +1,6 @@
 import Papa from 'papaparse';
 
-chrome.runtime.onMessage.addListener((url, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((url, sender, sendResponse) => {
 	fetch(url).then((res) => res.json().then((json) => sendResponse(json)));
 
 	return true;
@@ -23,7 +23,7 @@ function getNicknames() {
 		});
 }
 
-chrome.runtime.onInstalled.addListener(() => {
+browser.runtime.onInstalled.addListener(() => {
 	getNicknames();
 });
 
