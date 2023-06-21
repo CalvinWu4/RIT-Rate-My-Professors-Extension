@@ -5,7 +5,7 @@ const handleMessage = (data, sender, sendResponse) => {
 	if (data.type === "url") {
 		return fetch(data.content).then((res) => res.json().then((json) => sendResponse(json)));
 	} else {
-		return fetch('https://www.ratemyprofessors.com/graphql', {
+		sendResponse(fetch('https://www.ratemyprofessors.com/graphql', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const handleMessage = (data, sender, sendResponse) => {
 				Authorization: 'Basic dGVzdDp0ZXN0',
 			},
 			body: data.content
-		}).then((res) => res.json().then((json) => sendResponse(json)));
+		}).then((res) => res.json()))
 	}
 }
 browser.runtime.onMessage.addListener(handleMessage);
