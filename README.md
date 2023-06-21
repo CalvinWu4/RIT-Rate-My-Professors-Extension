@@ -19,3 +19,27 @@ To better find professors, this extension will try the first part of a hyphenate
 
 [link-chrome]: https://chrome.google.com/webstore/detail/rate-my-professors-for-ri/lcionigofpcbfpmnipnioapimoggnbda?hl=en&authuser=0 "Version published on Chrome Web Store"
 [link-firefox]: https://addons.mozilla.org/en-US/firefox/addon/rate-my-professors-for-rit/ "Version published on Mozilla Add-ons"
+
+
+## Building
+
+The build process goes through a few stages.
+
+If you just want to run a build, use `npm run build` for development and `npm run release` for production
+
+To run the extension in your browser, follow these instructions:
+
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
+
+Linting the source code can be done with `npm run lint` (uses eslint)
+
+Testing the output for both browsers to ensure extensions are valid can be done with `npm run test`
+
+### Stages
+
+**Stage 1 - fill in manifest**
+Using wwebpack, some values, like title, author, description, and version are copied from package.json, replacing those values in ./src/manifest.json so they dont need to be manually copied. Output file is written to build/manifest.json
+
+**Stage 2 - build script**
+using a build script based on one from [TOSDR](https://github.com/tosdr/browser-extensions) (AGPL3 license), make two copies of `src/` for chrome and firefox respectively. This script also injects some custom manifest properties from `firefox/manifest.json` into the firefox manifest. The modifications made relate mainly to handling of the generated manifest.json and allowing for an option to preserve the build directory for live development
+
