@@ -28,6 +28,7 @@
     "build": "NODE_ENV=development npm run build:manifest && ./build.sh keep-build",
     "test": "npm run build && npm run test-all",
     "lint": "eslint src",
+    "lint-fix": "eslint src --fix",
     "test-all": "npm run test-chrome && npm run test-ff",
     "test-ff": "web-ext lint --source-dir build/firefox",
     "test-chrome": "web-ext lint --source-dir build/chrome"
