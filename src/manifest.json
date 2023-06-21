@@ -20,7 +20,7 @@
 	"content_scripts": [
 		{
 			"js": [
-				"{{./content/index.js}}"
+				"./content/index.js"
 			],
 			"matches": [
 				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
@@ -32,13 +32,13 @@
 	],
 	"background": {
 		"scripts": [
-			"{{./background/index.js}}"
+			"./background/index.js"
 		]
 	},
 	"icons": {
-		"16": "{{../images/16.png}}",
-		"48": "{{../images/48.png}}",
-		"96": "{{../images/96.png}}",
-		"128": "{{../images/128.png}}"
+		"16": "./images/16.png",
+		"48": "./images/48.png",
+		"96": "./images/96.png",
+		"128": "./images/128.png"
 	}
 }
