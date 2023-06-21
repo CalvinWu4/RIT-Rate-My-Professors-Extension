@@ -1,10 +1,22 @@
 import Papa from 'papaparse';
 
-browser.runtime.onMessage.addListener((url, sender, sendResponse) => {
-	fetch(url).then((res) => res.json().then((json) => sendResponse(json)));
-
-	return true;
-});
+const handleMessage = (data, sender, sendResponse) => {
+	console.log("received message type " + data.type)
+	if (data.type === "url") {
+		return fetch(data.content).then((res) => res.json().then((json) => sendResponse(json)));
+	} else {
+		return fetch('https://www.ratemyprofessors.com/graphql', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				Authorization: 'Basic dGVzdDp0ZXN0',
+			},
+			body: data.content
+		}).then((res) => res.json().then((json) => sendResponse(json)));
+	}
+}
+browser.runtime.onMessage.addListener(handleMessage);
 
 // Save nicknames to chrome.storage.local
 function getNicknames() {
