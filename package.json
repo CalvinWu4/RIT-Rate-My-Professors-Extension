@@ -18,7 +18,7 @@
   },
   "scripts": {
     "clean": "rm -rf build/*; rm -rf dist/*",
-    "build:manifest": "webpack --config webpack.config.js",
+    "build:manifest": "webpack --config webpack.config.mjs",
     "release": "./build.sh",
     "build": "NODE_ENV=development npm run build:manifest && ./build.sh keep-build",
     "test": "npm run build && web-ext lint --source-dir build/",

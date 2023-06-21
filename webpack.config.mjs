@@ -1,9 +1,8 @@
-// you can just require .json, saves the 'fs'-hassle
-const path = require('path');
-
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const FileManagerPlugin = require('filemanager-webpack-plugin');
-const pkgjson = require('./package.json');
+import WebExtPlugin from 'web-ext-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import FileManagerPlugin from 'filemanager-webpack-plugin';
+import * as pkgjson from './package.json';
+import path from 'path';
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
@@ -41,7 +40,7 @@ function modify(buffer) {
 	return JSON.stringify(manifest, null, 2);
 }
 
-module.exports = {
+export default {
 	// For some reason, webpack insists on having an entrypoint and making some JS
 	// here we give it an entrypoint it cant make anything useful from and then later we use
 	// FileManagerPlugin to delete the generated file
