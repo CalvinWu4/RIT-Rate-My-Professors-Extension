@@ -1,12 +1,12 @@
 const customNames = {
-    "Thiagarajah Arujunan": "Al Arujunan",
-    "Abdulmutalib Masaud-Wahaishi": "Abdul Wahaishi"
-}
+	'Thiagarajah Arujunan': 'Al Arujunan',
+	'Abdulmutalib Masaud-Wahaishi': 'Abdul Wahaishi',
+};
 
-function replaceCustomNicknames(fullName){
-    if (customNames[fullName]) {
-        return customNames[fullName];
-    }
+function replaceCustomNicknames(fullName) {
+	if (customNames[fullName]) {
+		return customNames[fullName];
+	}
 
-    return fullName;
+	return fullName;
 }
