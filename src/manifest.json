@@ -25,6 +25,9 @@
 	],
 	"content_scripts": [
 		{
+			"js": [
+				"{{./content/index.js}}"
+			],
 			"matches": [
 				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
 				"https://schedulemaker.csh.rit.edu/*"
