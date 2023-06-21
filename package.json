@@ -23,7 +23,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "clean": "rm -rf build/*; rm -rf dist/*; rm -rf src/images",
+    "clean": "rm -rf build/*; rm -rf dist/*",
     "build:manifest": "webpack --config webpack.config.js",
     "release": "./build.sh",
     "build": "NODE_ENV=development npm run build:manifest && ./build.sh keep-build",
