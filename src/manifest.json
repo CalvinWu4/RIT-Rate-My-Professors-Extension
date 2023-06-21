@@ -5,7 +5,7 @@
 	"description": "{{prop-loader?description!../package.json}}",
 	"author": "{{prop-loader?author!../package.json}}",
 	"host_permissions": [
-		"https://search-production.ratemyprofessors.com/*",
+		"https://ratemyprofessors.com/graphql",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
 	],
 	"browser_specific_settings": {
