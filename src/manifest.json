@@ -8,20 +8,23 @@
 		"https://search-production.ratemyprofessors.com/*",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
 	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "rmp@example.com",
+			"strict_min_version": "101.0"
+		}
+	},
 	"permissions": [
 		"storage"
 	],
-	"browser_action": {
-		"default_title": ""
-	},
 	"web_accessible_resources": [
-		"content/content.css"
+		{
+			"resources": ["./content/content.css"],
+			"matches": ["<all_urls>"]
+		}
 	],
 	"content_scripts": [
 		{
-			"js": [
-				"content/content.js"
-			],
 			"matches": [
 				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
 				"https://schedulemaker.csh.rit.edu/*"
