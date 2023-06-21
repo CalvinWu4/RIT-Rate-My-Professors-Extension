@@ -4,6 +4,12 @@
 	"version": "will be filled in by webpack from ackage.json",
 	"description": "will be filled in by webpack from ackage.json",
 	"author": "will be filled in by webpack from ackage.json",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "rmp@example.com",
+			"strict_min_version": "101.0"
+		}
+	},
 	"host_permissions": [
 		"https://ratemyprofessors.com/graphql",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"

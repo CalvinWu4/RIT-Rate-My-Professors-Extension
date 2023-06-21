@@ -43,5 +43,5 @@ Files from `src` (except the manifest) are copied into two folders in `build` fo
 Some values in the manifest, like title, author, description, and version are filled in by webpack using the values from package.json. This manifest is copied to `build/chrome` and `build/`. This automation helps keep some metadata in sync so it doesnt need to be manually copied for each release. 
 
 **Stage 2 - firefox manifest injection and packaging**
-using a build script (`build.sh` and `mixin.js`) based on one from [TOSDR](https://github.com/tosdr/browser-extensions) (AGPL3 license), this stage injects some custom manifest properties from `firefox/manifest.json` into the firefox manifest (in `build`) and copies it to `build/firefox`. Modifications to `build.sh` were made to move most of the file copying to stage 1 and add an option to preserve the build dir
+using a build script (`build.sh` and `mixin.js`) based on one from [TOSDR](https://github.com/tosdr/browser-extensions) (AGPL3 license), this stage packages the contents of each browsers `build` directory into an installable package. Modifications to `build.sh` were made to move most of the file copying to stage 1 and add an option to preserve the build dir
 

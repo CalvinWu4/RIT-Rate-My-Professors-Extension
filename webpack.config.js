@@ -71,7 +71,7 @@ module.exports = {
 				},
 				{
 					from: manifestPath,
-					to: BUILD_DIR,
+					to: FIREFOX_DIR,
 					transform(content) {
 						return modify(content);
 					},
