@@ -19,9 +19,8 @@
   },
   "scripts": {
     "clean": "rm -rf build/*; rm -rf dist/*",
-    "build:manifest": "webpack --config webpack.config.mjs",
-    "release": "./build.sh",
-    "build": "NODE_ENV=development npm run build:manifest && ./build.sh keep-build",
+    "release": "NODE_ENV=production webpack --config webpack.config.mjs",
+    "build": "NODE_ENV=development webpack --config webpack.config.mjs",
     "test": "npm run build && web-ext lint --source-dir build/",
     "lint-fix": "eslint src --fix"
   },
