@@ -30,7 +30,8 @@
 			],
 			"matches": [
 				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
-				"https://schedulemaker.csh.rit.edu/*"
+				"https://schedulemaker.csh.rit.edu/*",
+				"https://schedule.csh.rit.edu/*"
 			],
 			"run_at": "document_end"
 		}
