@@ -54,15 +54,17 @@ export default {
 	// here we give it an entrypoint it cant make anything useful from and then later we use
 	// FileManagerPlugin to delete the generated file
 	// webpack is only being used to copy data from package.json into manifest.json
-	entry: ['./src/manifest.json'],
+	entry: {
+		background: './src/background/index.js',
+		content: './src/content/index.js',
+	},
+	output: {
+		filename: '[name].bundle.js',
+		path: BUILD_DIR,
+	},
 	plugins: [
 		new CopyWebpackPlugin({
 			patterns: [
-				{
-					from: SRC_DIR,
-					to: BUILD_DIR,
-					filter: async (resourcePath) => !resourcePath.endsWith('manifest.json'),
-				},
 				{
 					from: manifestPath,
 					to: BUILD_DIR,

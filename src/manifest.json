@@ -26,7 +26,7 @@
 	"content_scripts": [
 		{
 			"js": [
-				"./content/index.js"
+				"./content.bundle.js"
 			],
 			"matches": [
 				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
@@ -38,7 +38,7 @@
 	],
 	"background": {
 		"scripts": [
-			"./background/index.js"
+			"./background.bundle.js"
 		]
 	},
 	"icons": {
