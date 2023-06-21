@@ -46,43 +46,54 @@ function GetProfessorRatingNew(element, searchterm) {
 	const query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
-newSearch {
-    teachers(query: $query) {
-        didFallback
-        edges {
-            cursor
-            node {
-                id
-                legacyId
-                firstName
-                lastName
-                avgRatingRounded
-                numRatings
-                wouldTakeAgainPercentRounded
-                wouldTakeAgainCount
-                teacherRatingTags
-                mostUsefulRating {
-                    id
-                    class
-                    isForOnlineClass
-                    legacyId
-                    comment
-                    helpfulRatingRounded
-                    ratingTags
-                    grade
-                    teacherNote
-                    thumbsDownTotal
-                    thumbsUpTotal
-                }
-                avgDifficultyRounded
-                school {
-                    name
-                    id
-                }
-                department
-            }
-        }
-    }
+	newSearch {
+		teachers(query: $query) {
+			didFallback
+			edges {
+				cursor
+				node {
+					id
+					legacyId
+					firstName
+					lastName
+					avgRatingRounded
+					numRatings
+					wouldTakeAgainPercentRounded
+					wouldTakeAgainCount
+					teacherRatingTags {
+						id
+						legacyId
+						tagCount
+						tagName
+					}
+					mostUsefulRating {
+						id
+						class
+						isForOnlineClass
+						legacyId
+						comment
+						helpfulRatingRounded
+						ratingTags
+						grade
+						teacherNote{
+							id
+							comment
+							createdAt
+							class
+						}
+						thumbsDownTotal
+						thumbsUpTotal
+					}
+					avgDifficultyRounded
+					school {
+						name
+						id
+					}
+					department
+				}
+			}
+		}
+	}
 }`;
 
 
