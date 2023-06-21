@@ -52,6 +52,22 @@ newSearch {
                 lastName
                 avgRatingRounded
                 numRatings
+                wouldTakeAgainPercentRounded
+                wouldTakeAgainCount
+                teacherRatingTags
+                mostUsefulRating {
+                    id
+                    class
+                    isForOnlineClass
+                    legacyId
+                    comment
+                    helpfulRatingRounded
+                    ratingTags
+                    grade
+                    teacherNote
+                    thumbsDownTotal
+                    thumbsUpTotal
+                }
                 avgDifficultyRounded
                 school {
                     name
