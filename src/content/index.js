@@ -1,4 +1,7 @@
 const { graphql, buildSchema } = require('graphql');
+import { replaceCustomNicknames } from './addedNicknames';
+
+import { getNameCombos } from './utils';
 
 // Get nicknames from chrome.storage.local set by background
 let nicknames;

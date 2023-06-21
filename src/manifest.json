@@ -1,47 +1,50 @@
 {
-	"name" : "RIT Rate My Professors Extension",
-	"version" : "2.0.1",
-	"description" : "Shows the Rate My Professors rating of RIT professors while searching for classes on Tiger Center and CSH Schedule Maker.",
-	"host_permissions": [
-		"https://ratemyprofessors.com/graphql",
-		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
-	],
+	"manifest_version": 3,
+	"name": "will be filled in by webpack from ackage.json",
+	"version": "will be filled in by webpack from ackage.json",
+	"description": "will be filled in by webpack from ackage.json",
+	"author": "will be filled in by webpack from ackage.json",
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "rmp@example.com",
 			"strict_min_version": "101.0"
 		}
 	},
+	"host_permissions": [
+		"https://ratemyprofessors.com/graphql",
+		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
+	],
 	"permissions": [
 		"storage"
-	  ],	
-	"content_scripts": [{
-		"css": [
-			"node_modules/tippy.js/dist/tippy.css",
-			"node_modules/tippy.js/themes/light.css",
-			"prof-rating.css"
-		],
-		"js": [
-			"node_modules/arrive/minified/arrive.min.js",
-			"node_modules/@popperjs/core/dist/umd/popper.min.js",
-			"node_modules/tippy.js/dist/tippy-bundle.umd.min.js",
-			"addedNicknames.js",
-			"utils.js",
-			"contentscript.js"
-		],
-		"matches": [
-			"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
-			"https://schedulemaker.csh.rit.edu/*"
-		],
-		"run_at": "document_end"
-		}],
+	],
+	"web_accessible_resources": [
+		{
+			"resources": ["./content/content.css"],
+			"matches": ["<all_urls>"]
+		}
+	],
+	"content_scripts": [
+		{
+			"js": [
+				"./content/index.js"
+			],
+			"matches": [
+				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
+				"https://schedulemaker.csh.rit.edu/*",
+				"https://schedule.csh.rit.edu/*"
+			],
+			"run_at": "document_end"
+		}
+	],
 	"background": {
-		"scripts": ["bg-wrapper.js"]
+		"scripts": [
+			"./background/index.js"
+		]
 	},
-	"icons": { 
-		"16": "images/favicon.ico",
-		"48": "images/favicon.ico",
-		"128": "images/favicon.ico" 
-	},
-	"manifest_version" : 3
+	"icons": {
+		"16": "./images/16.png",
+		"48": "./images/48.png",
+		"96": "./images/96.png",
+		"128": "./images/128.png"
+	}
 }
