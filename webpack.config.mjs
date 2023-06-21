@@ -1,13 +1,18 @@
-// you can just require .json, saves the 'fs'-hassle
-const path = require('path');
-
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const FileManagerPlugin = require('filemanager-webpack-plugin');
+import WebExtPlugin from 'web-ext-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const pkgjson = require('./package.json');
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
+// 👇️ "/home/john/Desktop/javascript"
+const __dirname = path.dirname(__filename);
+
 const BUILD_DIR = path.resolve(__dirname, 'build');
-const CHROME_DIR = path.join(BUILD_DIR, 'chrome');
-const FIREFOX_DIR = path.join(BUILD_DIR, 'firefox');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const IMG_DIR = path.resolve(__dirname, 'images');
@@ -43,20 +48,22 @@ function modify(buffer) {
 	return JSON.stringify(manifest, null, 2);
 }
 
-module.exports = {
+export default {
 	// For some reason, webpack insists on having an entrypoint and making some JS
 	// here we give it an entrypoint it cant make anything useful from and then later we use
 	// FileManagerPlugin to delete the generated file
 	// webpack is only being used to copy data from package.json into manifest.json
-	entry: ['./src/manifest.json'],
+	entry: {
+		background: './src/background/index.js',
+		content: './src/content/index.js',
+	},
+	output: {
+		filename: '[name].bundle.js',
+		path: BUILD_DIR,
+	},
 	plugins: [
 		new CopyWebpackPlugin({
 			patterns: [
-				{
-					from: SRC_DIR,
-					to: BUILD_DIR,
-					filter: async (resourcePath) => !resourcePath.endsWith('manifest.json'),
-				},
 				{
 					from: manifestPath,
 					to: BUILD_DIR,
@@ -70,13 +77,7 @@ module.exports = {
 				},
 			],
 		}),
-		new FileManagerPlugin({
-			events: {
-				onEnd: {
-					delete: [path.join(DIST_DIR, 'main.js')],
-				},
-			},
-		}),
+		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true  })
 	],
 
 };
