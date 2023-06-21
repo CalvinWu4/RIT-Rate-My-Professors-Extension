@@ -77,6 +77,7 @@ export default {
 				},
 			],
 		}),
+		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true  })
 	],
 
 };
