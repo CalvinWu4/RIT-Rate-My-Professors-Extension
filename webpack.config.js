@@ -6,8 +6,6 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const pkgjson = require('./package.json');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
-const CHROME_DIR = path.join(BUILD_DIR, 'chrome');
-const FIREFOX_DIR = path.join(BUILD_DIR, 'firefox');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const IMG_DIR = path.resolve(__dirname, 'images');
