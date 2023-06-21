@@ -22,10 +22,11 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "start": "webpack --config webpack.config.js",
+    "clean": "rm -rf build/*; rm -rf dist/*",
+    "build:manifest": "webpack --config webpack.config.js",
     "release": "./build.sh",
-    "build": "./build.sh keep-build",
-    "test": "./build.sh keep-build && npm run test-all",
+    "build": "NODE_ENV=development npm run build:manifest && ./build.sh keep-build",
+    "test": "npm run build && npm run test-all",
     "lint": "eslint src",
     "test-all": "npm run test-chrome && npm run test-ff",
     "test-ff": "web-ext lint --source-dir build/firefox",
