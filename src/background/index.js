@@ -1,3 +1,5 @@
+import Papa from 'papaparse';
+
 chrome.runtime.onMessage.addListener((url, sender, sendResponse) => {
 	fetch(url).then((res) => res.json().then((json) => sendResponse(json)));
 
