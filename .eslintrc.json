@@ -9,7 +9,9 @@
         "sourceType": "module"
     },
     "rules": {
-        
-    },
-    "no-tabs": 0
+        "indent": [
+            1,
+            "tab"
+        ]
+    }
 }
