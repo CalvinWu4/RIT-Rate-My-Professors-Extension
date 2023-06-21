@@ -14,7 +14,7 @@ const surnameParticles = ['a', 'à', 'af', 'al', 'am', 'aus\'m', 'aus’m', 'av'
 	'le', 'li', 'lo', 'los', 'mac', 'ó', 'of', 'op', 'san', 'st', 'st.', '\'t', '’t', 'te', 'ten', 'ter', 'thoe',
 	'tot', 'van', 'vanden', 'vander', 'vom', 'von', 'y', 'z', 'zu', 'zum', 'zur'];
 
-function getNameCombos(nameArray) {
+export function getNameCombos(nameArray) {
 	nameArray = combinations(nameArray);
 
 	// Filter out name combos that only contain surname particles

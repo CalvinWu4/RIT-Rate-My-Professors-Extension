@@ -3,7 +3,7 @@ const customNames = {
 	'Abdulmutalib Masaud-Wahaishi': 'Abdul Wahaishi',
 };
 
-function replaceCustomNicknames(fullName) {
+export function replaceCustomNicknames(fullName) {
 	if (customNames[fullName]) {
 		return customNames[fullName];
 	}
