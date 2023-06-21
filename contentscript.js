@@ -39,18 +39,7 @@ selectors.forEach(selector => {
 
 function GetProfessorRatingNew(element, searchterm) {
 
-    var query = `query RollDice($dice: Int!, $sides: Int) {
-  rollDice(numDice: $dice, numSides: $sides)
-}`
-
-    fetch("https://www.ratemyprofessors.com/graphql", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Basic dGVzdDp0ZXN0"
-        },
-        body: `query NewSearchTeachersQuery(
+    var query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
 newSearch {
@@ -74,7 +63,25 @@ newSearch {
             }
         }
     }
-}`})
+}`;
+
+    fetch("https://www.ratemyprofessors.com/graphql", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Basic dGVzdDp0ZXN0"
+        },
+        body: JSON.stringify({
+            query,
+            variables: {
+                query: {
+                    text: searchterm,
+                    schoolID: "U2Nob29sLTgwNw=="
+                }
+            }
+        })
+    })
     .then(r => r.json())
     .then(data => console.log("data returned:", data))
 
