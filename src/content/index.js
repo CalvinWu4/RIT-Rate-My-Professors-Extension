@@ -2,6 +2,8 @@ import { replaceCustomNicknames } from './addedNicknames';
 
 import { getNameCombos } from './utils';
 
+import 'arrive';
+
 const { graphql, buildSchema } = require('graphql');
 
 
