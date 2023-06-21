@@ -6,6 +6,12 @@
 		"https://ratemyprofessors.com/graphql",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
 	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "rmp@example.com",
+			"strict_min_version": "101.0"
+		}
+	},
 	"permissions": [
 		"storage"
 	  ],	
@@ -30,7 +36,7 @@
 		"run_at": "document_end"
 		}],
 	"background": {
-		"service_worker": "bg-wrapper.js"
+		"scripts": ["bg-wrapper.js"]
 	},
 	"icons": { 
 		"16": "images/favicon.ico",
