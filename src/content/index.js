@@ -85,25 +85,24 @@ newSearch {
     }
 }`;
 
-	fetch('https://www.ratemyprofessors.com/graphql', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-			Authorization: 'Basic dGVzdDp0ZXN0',
-		},
-		body: JSON.stringify({
-			query,
-			variables: {
-				query: {
-					text: searchterm,
-					schoolID: 'U2Nob29sLTgwNw==',
-				},
+
+	const body = JSON.stringify({
+		query,
+		variables: {
+			query: {
+				text: searchterm,
+				schoolID: 'U2Nob29sLTgwNw==',
 			},
-		}),
-	})
-		.then((r) => r.json())
-		.then((data) => console.log('data returned:', data));
+		}
+	});
+	browser.runtime.sendMessage({
+		type: "graphql",
+		content: body
+	}, async (json) => {
+		console.log("done");
+		console.log(json);
+
+	});
 }
 
 let restoreFirstName = false;
