@@ -1,17 +1,43 @@
 {
   "name": "rit-rate-my-professor-extension",
-  "version": "1.0.0",
+  "version": "2.0.1",
+  "description": "Shows the Rate My Professors rating of RIT professors while searching for classes on Tiger Center and CSH Schedule Maker.",
+  "author": "Calvin Wu",
   "dependencies": {
     "@popperjs/core": "^2.8.6",
     "arrive": "^2.4.1",
     "papaparse": "^5.3.0",
     "tippy.js": "^6.3.1"
   },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-minify-webpack-plugin": "^0.2.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "extract-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "extricate-loader": "^2.0.0",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
+    "imports-loader": "^0.7.1",
+    "interpolate-loader": "^2.0.0",
+    "prop-loader": "^1.0.0",
+    "raw-loader": "^0.5.1",
+    "spawn-loader": "^4.0.0",
+    "webextension-polyfill": "^0.2.1",
+    "webpack": "^3.7.1",
+    "webpack-sources": "1.0.1"
+  },
+  "scripts": {
+    "start": "webpack --config webpack.config.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CalvinWu4/RIT-Rate-My-Professor-Extension.git"
   },
-  "author": "Calvin Wu",
   "bugs": {
     "url": "https://github.com/CalvinWu4/RIT-Rate-My-Professor-Extension/issues"
   },

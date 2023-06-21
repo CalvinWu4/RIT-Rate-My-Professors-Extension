@@ -1,3 +1,8 @@
+import { replaceCustomNicknames } from './addedNicknames';
+
+import { getNameCombos } from './utils';
+
+
 // Get nicknames from chrome.storage.local set by background
 let nicknames;
 chrome.storage.local.get(['nicknames'], function(result) {
