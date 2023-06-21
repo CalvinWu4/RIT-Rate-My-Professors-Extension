@@ -25,7 +25,7 @@ To better find professors, this extension will try the first part of a hyphenate
 
 The build process goes through a few stages.
 
-If you just want to run a build, use `npm run build` for development and `npm run release` for production
+If you just want to run a build, use `npm run build-dev` for development and `npm run build` for production
 
 To run the extension in your browser, follow these instructions:
 
