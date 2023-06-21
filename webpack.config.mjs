@@ -1,7 +1,10 @@
 import WebExtPlugin from 'web-ext-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import FileManagerPlugin from 'filemanager-webpack-plugin';
-import * as pkgjson from './package.json';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pkgjson = require('./package.json');
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
