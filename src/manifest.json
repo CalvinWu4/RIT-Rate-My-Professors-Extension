@@ -1,9 +1,9 @@
 {
 	"manifest_version": 3,
-	"name": "{{prop-loader?name!../package.json}}",
-	"version": "{{prop-loader?version!../package.json}}",
-	"description": "{{prop-loader?description!../package.json}}",
-	"author": "{{prop-loader?author!../package.json}}",
+	"name": "will be filled in by webpack from ackage.json",
+	"version": "will be filled in by webpack from ackage.json",
+	"description": "will be filled in by webpack from ackage.json",
+	"author": "will be filled in by webpack from ackage.json",
 	"host_permissions": [
 		"https://ratemyprofessors.com/graphql",
 		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"

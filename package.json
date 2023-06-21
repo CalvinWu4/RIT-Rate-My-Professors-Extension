@@ -10,17 +10,26 @@
     "tippy.js": "^6.3.1"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.43.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-promise": "^6.1.1",
-    "webextension-polyfill": "^0.2.1"
+    "filemanager-webpack-plugin": "^8.0.0",
+    "webpack": "^5.87.0",
+    "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "start": "webpack --config webpack.config.js",
-    "lint": "npm start && web-ext lint --source-dir dist"
+    "release": "./build.sh",
+    "build": "./build.sh keep-build",
+    "test": "./build.sh keep-build && npm run test-all",
+    "lint": "eslint src",
+    "test-all": "npm run test-chrome && npm run test-ff",
+    "test-ff": "web-ext lint --source-dir build/firefox",
+    "test-chrome": "web-ext lint --source-dir build/chrome"
   },
   "repository": {
     "type": "git",
