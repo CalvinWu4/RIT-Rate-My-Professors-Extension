@@ -1,6 +1,5 @@
 import WebExtPlugin from 'web-ext-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import FileManagerPlugin from 'filemanager-webpack-plugin';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const pkgjson = require('./package.json');
@@ -77,13 +76,6 @@ export default {
 					to: path.join(BUILD_DIR, 'images'),
 				},
 			],
-		}),
-		new FileManagerPlugin({
-			events: {
-				onEnd: {
-					delete: [path.join(DIST_DIR, 'main.js')],
-				},
-			},
 		}),
 	],
 
