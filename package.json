@@ -21,8 +21,7 @@
     "clean": "rm -rf build/*; rm -rf dist/*",
     "release": "NODE_ENV=production webpack --config webpack.config.mjs",
     "build": "NODE_ENV=development webpack --config webpack.config.mjs",
-    "test": "npm run build && web-ext lint --source-dir build/",
-    "lint-fix": "eslint src --fix"
+    "test": "npm run build && web-ext lint --source-dir build/"
   },
   "repository": {
     "type": "git",

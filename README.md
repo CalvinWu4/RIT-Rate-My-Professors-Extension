@@ -31,8 +31,6 @@ To run the extension in your browser, follow these instructions:
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
 
-Linting the source code can be done with `npm run lint` (uses eslint)
-
 Testing the output for both browsers to ensure extensions are valid can be done with `npm run test`
 
 ### Stages
