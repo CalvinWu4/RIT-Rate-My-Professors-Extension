@@ -12,7 +12,9 @@
 	},
 	"host_permissions": [
 		"https://ratemyprofessors.com/graphql",
-		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/"
+		"https://www.ratemyprofessors.com/graphql",
+		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/",
+		"webRequest"
 	],
 	"permissions": [
 		"storage"
