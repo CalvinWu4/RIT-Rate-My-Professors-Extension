@@ -6,7 +6,12 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const pkgjson = require('./package.json');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
+const CHROME_DIR = path.join(BUILD_DIR, 'chrome');
+const FIREFOX_DIR = path.join(BUILD_DIR, 'firefox');
+
 const DIST_DIR = path.resolve(__dirname, 'dist');
+const IMG_DIR = path.resolve(__dirname, 'images');
+
 const SRC_DIR = path.resolve(__dirname, 'src');
 const MANIFEST_FILE = 'manifest.json';
 
@@ -48,11 +53,36 @@ module.exports = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{
+					from: SRC_DIR,
+					to: CHROME_DIR,
+					filter: async (resourcePath) => !resourcePath.endsWith('manifest.json'),
+				},
+				{
+					from: SRC_DIR,
+					to: FIREFOX_DIR,
+					filter: async (resourcePath) => !resourcePath.endsWith('manifest.json'),
+				},
+				{
+					from: manifestPath,
+					to: CHROME_DIR,
+					transform(content) {
+						return modify(content);
+					},
+				},
+				{
 					from: manifestPath,
 					to: BUILD_DIR,
 					transform(content) {
 						return modify(content);
 					},
+				},
+				{
+					from: IMG_DIR,
+					to: path.join(CHROME_DIR, 'images'),
+				},
+				{
+					from: IMG_DIR,
+					to: path.join(FIREFOX_DIR, 'images'),
 				},
 			],
 		}),

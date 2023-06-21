@@ -37,9 +37,11 @@ Testing the output for both browsers to ensure extensions are valid can be done 
 
 ### Stages
 
-**Stage 1 - fill in manifest**
-Using wwebpack, some values, like title, author, description, and version are copied from package.json, replacing those values in ./src/manifest.json so they dont need to be manually copied. Output file is written to build/manifest.json
+**Stage 1 - copy files and fill in manifest**
+Files from `src` (except the manifest) are copied into two folders in `build` for chrome and firefox respectively.
 
-**Stage 2 - build script**
-using a build script based on one from [TOSDR](https://github.com/tosdr/browser-extensions) (AGPL3 license), make two copies of `src/` for chrome and firefox respectively. This script also injects some custom manifest properties from `firefox/manifest.json` into the firefox manifest. The modifications made relate mainly to handling of the generated manifest.json and allowing for an option to preserve the build directory for live development
+Some values in the manifest, like title, author, description, and version are filled in by webpack using the values from package.json. This manifest is copied to `build/chrome` and `build/`. This automation helps keep some metadata in sync so it doesnt need to be manually copied for each release. 
+
+**Stage 2 - firefox manifest injection and packaging**
+using a build script (`build.sh` and `mixin.js`) based on one from [TOSDR](https://github.com/tosdr/browser-extensions) (AGPL3 license), this stage injects some custom manifest properties from `firefox/manifest.json` into the firefox manifest (in `build`) and copies it to `build/firefox`. Modifications to `build.sh` were made to move most of the file copying to stage 1 and add an option to preserve the build dir
 
