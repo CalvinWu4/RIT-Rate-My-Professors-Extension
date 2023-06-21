@@ -31,9 +31,7 @@ selectors.forEach(selector => {
         const middleAndLastNameCombosIndex = 0;
         const tryMiddleNameAsFirst = true;
         // Query Rate My Professor with the professor's name
-        GetProfessorRating(this, fullName, lastName, originalLastName, firstName, originalFirstName, middleNames,
-            originalMiddleNames, tryNicknames, nicknamesIndex, tryMiddleAndLastNameCombos,
-            middleAndLastNameCombosIndex, tryMiddleNameAsFirst, tryMiddleNames);
+        GetProfessorRatingNew(this, firstName + " " + lastName);
     });
 });
 
