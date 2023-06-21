@@ -1,3 +1,5 @@
+var { graphql, buildSchema } = require("graphql")
+
 // Get nicknames from chrome.storage.local set by background
 let nicknames;
 chrome.storage.local.get(['nicknames'], function(result) {
@@ -34,6 +36,49 @@ selectors.forEach(selector => {
             middleAndLastNameCombosIndex, tryMiddleNameAsFirst, tryMiddleNames);
     });
 });
+
+function GetProfessorRatingNew(element, searchterm) {
+
+    var query = `query RollDice($dice: Int!, $sides: Int) {
+  rollDice(numDice: $dice, numSides: $sides)
+}`
+
+    fetch("https://www.ratemyprofessors.com/graphql", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Basic dGVzdDp0ZXN0"
+        },
+        body: `query NewSearchTeachersQuery(
+    $query: TeacherSearchQuery!
+) {
+newSearch {
+    teachers(query: $query) {
+        didFallback
+        edges {
+            cursor
+            node {
+                id
+                legacyId
+                firstName
+                lastName
+                avgRatingRounded
+                numRatings
+                avgDifficultyRounded
+                school {
+                    name
+                    id
+                }
+                department
+            }
+        }
+    }
+}`})
+    .then(r => r.json())
+    .then(data => console.log("data returned:", data))
+
+}
 
 let restoreFirstName = false;
 let restoreMiddleNames = false;
