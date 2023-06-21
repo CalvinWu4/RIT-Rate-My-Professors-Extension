@@ -32,7 +32,8 @@
     "webpack-sources": "1.0.1"
   },
   "scripts": {
-    "start": "webpack --config webpack.config.js"
+    "start": "webpack --config webpack.config.js",
+    "lint": "npm start && web-ext lint --source-dir dist"
   },
   "repository": {
     "type": "git",
