@@ -4,9 +4,6 @@ import { getNameCombos } from './utils';
 
 import 'arrive';
 
-const { graphql, buildSchema } = require('graphql');
-
-
 // Get nicknames from chrome.storage.local set by background
 let nicknames;
 chrome.storage.local.get(['nicknames'], (result) => {
