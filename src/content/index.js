@@ -36,7 +36,17 @@ selectors.forEach((selector) => {
 		const middleAndLastNameCombosIndex = 0;
 		const tryMiddleNameAsFirst = true;
 		// Query Rate My Professor with the professor's name
-		GetProfessorRatingNew(this, `${firstName} ${lastName}`);
+		GetProfessorRatingNew(`${firstName} ${lastName}`).then((f) => {
+			if (f.length == 0) {
+				//retry some other names on the list
+
+				//eventually this may be a no professor found situation
+			} else if (f.length >= 1) {
+				let profData = f[0]
+				displaySingleProfRating(this, profData);
+			}
+		
+		})
 	});
 });
 
@@ -311,6 +321,34 @@ function GetProfessorRating(
 	});
 }
 
+
+///assumes that there is one prof data object provided
+function displaySingleProfRating(element, profData){
+
+	const { numFound } = json.response;
+	const { docs } = json.response;
+	let doc;
+
+	element.setAttribute('target', '_blank');
+	element.classList.add('blueText');
+	element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
+
+
+	// Add professor data if found
+	const profID = doc.pk_id; //profData.legacyId
+	const realFullName = doc.teacherfullname_s; //profdata.getFullName()
+	const dept = doc.teacherdepartment_s; //profData.department
+	const profRating = doc.averageratingscore_rf && doc.averageratingscore_rf.toFixed(1);
+	const numRatings = doc.total_number_of_ratings_i; //profData.ratingsCount
+	const easyRating = doc.averageeasyscore_rf && doc.averageeasyscore_rf.toFixed(1); 
+
+	element.textContent += ` (${profData.getRatingString()})`;
+	element.setAttribute('href', profData.getURL());
+
+	const allprofRatingsURL = `https://www.ratemyprofessors.com/paginate/professors/ratings?tid=${profID
+		}&page=0&max=20`;
+	AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept);
+}
 function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept) {
 	let ratings = [];
 	function getRatings(url) {
