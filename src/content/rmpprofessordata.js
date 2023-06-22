@@ -1,4 +1,4 @@
-export default class RMPData {
+export default class RMPProfessorData {
 
 	constructor(firstName, year) {
 		this.firstName = firstName;
