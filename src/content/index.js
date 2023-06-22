@@ -326,39 +326,18 @@ function GetProfessorRating(
 ///assumes that there is one prof data object provided
 function displaySingleProfRating(element, profData){
 
-	const { numFound } = json.response;
-	const { docs } = json.response;
-	let doc;
-
 	element.setAttribute('target', '_blank');
 	element.classList.add('blueText');
 	element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
 
 
-	// Add professor data if found
-	const profID = doc.pk_id; //profData.legacyId
-	const realFullName = doc.teacherfullname_s; //profdata.getFullName()
-	const dept = doc.teacherdepartment_s; //profData.department
-	const profRating = doc.averageratingscore_rf && doc.averageratingscore_rf.toFixed(1);
-	const numRatings = doc.total_number_of_ratings_i; //profData.ratingsCount
-	const easyRating = doc.averageeasyscore_rf && doc.averageeasyscore_rf.toFixed(1); 
-
 	element.textContent += ` (${profData.getRatingString()})`;
 	element.setAttribute('href', profData.getURL());
 
-	const allprofRatingsURL = `https://www.ratemyprofessors.com/paginate/professors/ratings?tid=${profID
-		}&page=0&max=20`;
-	AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept);
+	setupSingleProfToolTip(element, profData);
 }
 
 function setupSingleProfToolTip(element, profData) {
-
-	// Build content for professor tooltip
-	let wouldTakeAgain = 0;
-	let wouldTakeAgainNACount = 0;
-	let mostHelpfulReview;
-	let helpCount;
-	let notHelpCount;
 	let wouldTakeAgainText;
 	let easyRatingText;
 
