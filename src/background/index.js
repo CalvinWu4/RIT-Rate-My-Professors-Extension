@@ -1,10 +1,7 @@
 import Papa from 'papaparse';
 
 function handleMessage (data, sender, sendResponse) {
-	if (data.type === "url") {
-		//deprecated
-		return fetch(data.content).then((res) => res.json()).then((json) => sendResponse(json));
-	} else {
+	if (data.type === "graphql") {
 		return fetch('https://www.ratemyprofessors.com/graphql', {
 			method: 'POST',
 			headers: {
