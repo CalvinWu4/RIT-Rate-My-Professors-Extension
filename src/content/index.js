@@ -107,9 +107,19 @@ async function GetProfessorRatingNew (element, searchterm) {
 	return browser.runtime.sendMessage({
 		type: "graphql",
 		content: body
-	});
+	}).then((data) => normalizeGraphQLData(data));
 }
 
+function normalizeGraphQLData(data) {
+	//remove useless layers
+	data = data.data.newSearch.teachers;
+	//TODO: dont know what didFallback means in the graphQL API, probably just ignore it
+	data = data.edges;
+	//
+	data = data.map((value) => value.node);
+
+	return data
+}
 let restoreFirstName = false;
 let restoreMiddleNames = false;
 function GetProfessorRating(
