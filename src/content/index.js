@@ -50,7 +50,7 @@ selectors.forEach((selector) => {
 	});
 });
 
-async function GetProfessorRatingNew (element, searchterm) {
+async function GetProfessorRatingNew (searchterm) {
 	const query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
