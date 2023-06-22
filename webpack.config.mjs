@@ -76,6 +76,10 @@ export default {
 					from: IMG_DIR,
 					to: path.join(BUILD_DIR, 'images'),
 				},
+				{
+					from: path.resolve(SRC_DIR, 'content/content.css'),
+					to: BUILD_DIR,
+				},
 			],
 		}),
 		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true  })
