@@ -73,6 +73,9 @@ async function GetProfessorRatingNew (element, searchterm) {
 						helpfulRatingRounded
 						ratingTags
 						grade
+						date
+						qualityRating
+						difficultyRatingRounded
 						teacherNote{
 							id
 							comment
