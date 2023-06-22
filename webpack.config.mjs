@@ -90,7 +90,7 @@ export default {
 				},
 			],
 		}),
-		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true  })
+		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true, overwriteDest:true  })
 	],
 
 };
