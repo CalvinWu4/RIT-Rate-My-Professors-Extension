@@ -57,6 +57,7 @@ export default {
 		background: './src/background/index.js',
 		content: './src/content/index.js',
 	},
+	devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-source-map',
 	output: {
 		filename: '[name].bundle.js',
 		path: BUILD_DIR,
