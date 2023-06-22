@@ -381,57 +381,27 @@ function setupSingleProfToolTip(element, profData) {
 	numRatingsText.textContent = `Number of Ratings: ${profData.ratingsCount}`;
 	div.appendChild(numRatingsText);
 
-	if (ratings.length > 0) {
-		const tagFreqMap = new Map();
-		for (let i = 0; i < ratings.length; i++) {
-			const rating = ratings[i];
-			if (rating.rWouldTakeAgain === 'Yes') {
-				wouldTakeAgain++;
-			} else if (rating.rWouldTakeAgain === 'N/A') {
-				wouldTakeAgainNACount++;
-			}
+	
 
-			const { teacherRatingTags } = rating;
-			for (let j = 0; j < teacherRatingTags.length; j++) {
-				const tag = teacherRatingTags[j];
-				if (tagFreqMap.get(tag)) {
-					tagFreqMap.get(tag).count++;
-				} else {
-					tagFreqMap.set(tag, { count: 0 });
-				}
-			}
-		}
+	easyRatingText = document.createElement('div');
+	easyRatingText.classList.add('prof-rating-text');
+	easyRatingText.textContent = `Level of Difficulty: ${profData.difficultyGPA}`;
+	div.appendChild(easyRatingText);
+	wouldTakeAgainText = document.createElement('div');
+	wouldTakeAgainText.classList.add('prof-rating-text');
+	
 
-		// ratings.sort((a, b) => new Date(b.rDate) - new Date(a.rDate));
-		// ratings.sort((a, b) => (b.helpCount - b.notHelpCount) - (a.helpCount - a.notHelpCount));
-		mostHelpfulReview = ratings[0];
-		helpCount = mostHelpfulReview.helpCount;
-		notHelpCount = mostHelpfulReview.notHelpCount;
-
-		const topTags = ([...tagFreqMap.entries()].sort((a, b) => a.count - b.count)).splice(0, 5);
-		easyRatingText = document.createElement('div');
-		easyRatingText.classList.add('prof-rating-text');
-		easyRatingText.textContent = `Level of Difficulty: ${profData.difficultyGPA}`;
-		div.appendChild(easyRatingText);
-		wouldTakeAgainText = document.createElement('div');
-		wouldTakeAgainText.classList.add('prof-rating-text');
-		// wouldTakeAgain = `${profData.wouldTakeAgainPercentage}%`
-		// if (ratings.length >= 8 && wouldTakeAgainNACount < (ratings.length / 2)) {
-		// 	wouldTakeAgain = `${profData.wouldTakeAgainPercentage}%`;
-		// } else {
-		// 	wouldTakeAgain = 'N/A';
-		// }
-		wouldTakeAgainText.textContent = `Would take again: ${profData.wouldTakeAgainPercentage}%`;
-		div.appendChild(wouldTakeAgainText);
-		const topTagsText = document.createElement('div');
-		topTagsText.classList.add('prof-rating-text');
-		topTagsText.textContent = 'Top Tags: ';
-		if (profData.topTags.length > 0) {
-			topTagsText.textContent = this.topTags.join(", ");
-			div.appendChild(topTagsText);
-		}
-		div.appendChild(document.createElement('br'));
+	wouldTakeAgainText.textContent = `Would take again: ${profData.wouldTakeAgainPercentage}%`;
+	div.appendChild(wouldTakeAgainText);
+	const topTagsText = document.createElement('div');
+	topTagsText.classList.add('prof-rating-text');
+	topTagsText.textContent = 'Top Tags: ';
+	if (profData.topTags.length > 0) {
+		topTagsText.textContent = this.topTags.join(", ");
+		div.appendChild(topTagsText);
 	}
+	div.appendChild(document.createElement('br'));
+	
 	if (profData.mostHelpfulRating) {
 		const mostHelpfulReview = profData.mostHelpfulRating
 		const classText = document.createElement('div');
