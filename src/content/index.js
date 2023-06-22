@@ -84,6 +84,7 @@ async function GetProfessorRatingNew (element, searchterm) {
 						ratingTags
 						grade
 						date
+						iWouldTakeAgain
 						qualityRating
 						difficultyRatingRounded
 						teacherNote{
