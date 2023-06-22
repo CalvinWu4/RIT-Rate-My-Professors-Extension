@@ -118,7 +118,7 @@ function normalizeGraphQLData(data) {
 	//
 	data = data.map((value) => value.node);
 
-	return data
+	return RMPData.fromGraphQL(data);
 }
 let restoreFirstName = false;
 let restoreMiddleNames = false;
