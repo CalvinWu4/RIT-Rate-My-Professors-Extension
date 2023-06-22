@@ -4,6 +4,7 @@ import RMPProfessorData from './rmpprofessordata';
 import { getNameCombos } from './utils';
 
 import 'arrive';
+import tippy from 'tippy.js';
 
 // Get nicknames from chrome.storage.local set by background
 let nicknames;
