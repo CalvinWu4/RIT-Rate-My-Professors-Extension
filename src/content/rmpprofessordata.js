@@ -2,7 +2,9 @@ import RMPRatingData from "./rmpratingdata";
 
 export default class RMPProfessorData {
 
-	constructor(firstName, middleName, lastName, department, qualityRating, ratingsCount, difficultyGPA, wouldTakeAgainPercentage, wouldTakeAgainCount, topTags, mostHelpfulRating) {
+	constructor(id, legacyID, firstName, middleName, lastName, department, qualityRating, ratingsCount, difficultyGPA, wouldTakeAgainPercentage, wouldTakeAgainCount, topTags, mostHelpfulRating) {
+		this.id = id || 0;
+		this.legacyID = legacyID || "";
 		this.firstName = firstName || "";
 		this.middleName = middleName || "";
 		this.lastName = lastName || "";
@@ -19,6 +21,8 @@ export default class RMPProfessorData {
 
 	fromGraphQL(data) {
 		return new RMPProfessorData(
+			data.id,
+			data.legacyId,
 			data.firstName,
 			"",
 			data.lastName,
