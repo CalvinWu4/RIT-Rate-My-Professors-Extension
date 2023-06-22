@@ -39,7 +39,7 @@ selectors.forEach((selector) => {
 	});
 });
 
-function GetProfessorRatingNew(element, searchterm) {
+async function GetProfessorRatingNew (element, searchterm) {
 	const query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
@@ -103,13 +103,10 @@ function GetProfessorRatingNew(element, searchterm) {
 			},
 		}
 	});
-	browser.runtime.sendMessage({
+
+	return browser.runtime.sendMessage({
 		type: "graphql",
 		content: body
-	}, async (json) => {
-		console.log("done");
-		console.log(json);
-
 	});
 }
 

@@ -1,11 +1,11 @@
 import Papa from 'papaparse';
 
-const handleMessage = (data, sender, sendResponse) => {
+function handleMessage (data, sender, sendResponse) {
 	console.log("received message type " + data.type)
 	if (data.type === "url") {
 		return fetch(data.content).then((res) => res.json().then((json) => sendResponse(json)));
 	} else {
-		sendResponse(fetch('https://www.ratemyprofessors.com/graphql', {
+		return fetch('https://www.ratemyprofessors.com/graphql', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const handleMessage = (data, sender, sendResponse) => {
 				Authorization: 'Basic dGVzdDp0ZXN0',
 			},
 			body: data.content
-		}).then((res) => res.json()))
+		}).then((res) => res.json());
 	}
 }
 browser.runtime.onMessage.addListener(handleMessage);
