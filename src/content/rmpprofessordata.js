@@ -36,5 +36,17 @@ export default class RMPProfessorData {
 			data.mostUsefulRating ? RMPRatingData.fromGraphQL(data.mostHelpfulRating) : undefined,			
 		)
 	}
+
+
+	getURL() {
+		return "https://www.ratemyprofessors.com/professor/" + this.legacyID
+	}
+
+	getRatingString() {
+		return this.difficultyGPA? this.difficultyGPA : "N/A"
+	}
 	
+	getFullName() {
+		return `${this.firstName} ${this.middleName ? ` ${this.middleName} ` : ""} ${this.lastName}`
+	}
 }
