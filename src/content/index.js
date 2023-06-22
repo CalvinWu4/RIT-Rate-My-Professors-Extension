@@ -443,9 +443,7 @@ function setupSingleProfToolTip(element, profData) {
 		placement: 'right',
 		// show delay is 500ms, hide delay is 0ms
 		delay: [500, 0],
-		onShow(instance) {
-			instance.setContent(div);
-		},
+		content: div
 	});
 }
 
