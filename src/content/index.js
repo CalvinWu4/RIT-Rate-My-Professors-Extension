@@ -439,7 +439,6 @@ function setupSingleProfToolTip(element, profData) {
 	}
 	tippy(element, {
 		theme: 'light',
-		allowHTML: true,
 		placement: 'right',
 		// show delay is 500ms, hide delay is 0ms
 		delay: [500, 0],
