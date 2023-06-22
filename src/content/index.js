@@ -1,4 +1,5 @@
 import { replaceCustomNicknames } from './addedNicknames';
+import RMPProfessorData from './rmpprofessordata';
 
 import { getNameCombos } from './utils';
 
@@ -116,9 +117,9 @@ function normalizeGraphQLData(data) {
 	//TODO: dont know what didFallback means in the graphQL API, probably just ignore it
 	data = data.edges;
 	//
-	data = data.map((value) => value.node);
+	data = data.map((value) => RMPProfessorData.fromGraphQL(value.node));
+	return data;
 
-	return RMPData.fromGraphQL(data);
 }
 let restoreFirstName = false;
 let restoreMiddleNames = false;
