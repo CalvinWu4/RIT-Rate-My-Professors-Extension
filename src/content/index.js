@@ -350,6 +350,142 @@ function displaySingleProfRating(element, profData){
 		}&page=0&max=20`;
 	AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept);
 }
+
+function setupSingleProfToolTip(element, profData) {
+
+	// Build content for professor tooltip
+	let wouldTakeAgain = 0;
+	let wouldTakeAgainNACount = 0;
+	let mostHelpfulReview;
+	let helpCount;
+	let notHelpCount;
+	let wouldTakeAgainText;
+	let easyRatingText;
+
+	const div = document.createElement('div');
+	const title = document.createElement('div');
+	title.classList.add('prof-rating-title');
+	title.textContent = 'Rate My Professor Details';
+	div.appendChild(title);
+
+	const professorText = document.createElement('div');
+	professorText.classList.add('prof-rating-text');
+	professorText.textContent = `${profData.getFullName()}, Professor in ${profData.department}`;
+	div.appendChild(professorText);
+	const avgRatingText = document.createElement('div');
+	avgRatingText.classList.add('prof-rating-text');
+	avgRatingText.textContent = `Overall Quality: ${profData.getRatingString()}/5`;
+	div.appendChild(avgRatingText);
+	const numRatingsText = document.createElement('div');
+	numRatingsText.classList.add('prof-rating-text');
+	numRatingsText.textContent = `Number of Ratings: ${profData.ratingsCount}`;
+	div.appendChild(numRatingsText);
+
+	if (ratings.length > 0) {
+		const tagFreqMap = new Map();
+		for (let i = 0; i < ratings.length; i++) {
+			const rating = ratings[i];
+			if (rating.rWouldTakeAgain === 'Yes') {
+				wouldTakeAgain++;
+			} else if (rating.rWouldTakeAgain === 'N/A') {
+				wouldTakeAgainNACount++;
+			}
+
+			const { teacherRatingTags } = rating;
+			for (let j = 0; j < teacherRatingTags.length; j++) {
+				const tag = teacherRatingTags[j];
+				if (tagFreqMap.get(tag)) {
+					tagFreqMap.get(tag).count++;
+				} else {
+					tagFreqMap.set(tag, { count: 0 });
+				}
+			}
+		}
+
+		// ratings.sort((a, b) => new Date(b.rDate) - new Date(a.rDate));
+		// ratings.sort((a, b) => (b.helpCount - b.notHelpCount) - (a.helpCount - a.notHelpCount));
+		mostHelpfulReview = ratings[0];
+		helpCount = mostHelpfulReview.helpCount;
+		notHelpCount = mostHelpfulReview.notHelpCount;
+
+		const topTags = ([...tagFreqMap.entries()].sort((a, b) => a.count - b.count)).splice(0, 5);
+		easyRatingText = document.createElement('div');
+		easyRatingText.classList.add('prof-rating-text');
+		easyRatingText.textContent = `Level of Difficulty: ${profData.difficultyGPA}`;
+		div.appendChild(easyRatingText);
+		wouldTakeAgainText = document.createElement('div');
+		wouldTakeAgainText.classList.add('prof-rating-text');
+		// wouldTakeAgain = `${profData.wouldTakeAgainPercentage}%`
+		// if (ratings.length >= 8 && wouldTakeAgainNACount < (ratings.length / 2)) {
+		// 	wouldTakeAgain = `${profData.wouldTakeAgainPercentage}%`;
+		// } else {
+		// 	wouldTakeAgain = 'N/A';
+		// }
+		wouldTakeAgainText.textContent = `Would take again: ${profData.wouldTakeAgainPercentage}%`;
+		div.appendChild(wouldTakeAgainText);
+		const topTagsText = document.createElement('div');
+		topTagsText.classList.add('prof-rating-text');
+		topTagsText.textContent = 'Top Tags: ';
+		if (profData.topTags.length > 0) {
+			topTagsText.textContent = this.topTags.join(", ");
+			div.appendChild(topTagsText);
+		}
+		div.appendChild(document.createElement('br'));
+	}
+	if (profData.mostHelpfulRating) {
+		const mostHelpfulReview = profData.mostHelpfulRating
+		const classText = document.createElement('div');
+		classText.classList.add('prof-rating-text');
+		classText.textContent = `Most Helpful Rating: ${mostHelpfulReview.course
+			}${mostHelpfulReview.isOnlineClass ? ' (Online)' : ''}`; // Mark if class was online
+		div.appendChild(classText);
+		const dateText = document.createElement('div');
+		dateText.classList.add('prof-rating-text');
+		dateText.textContent = mostHelpfulReview.date; //TODO: maybe convert to string date
+		div.appendChild(dateText);
+		const profRating = document.createElement('div');
+		profRating.classList.add('prof-rating-text');
+		profRating.textContent = `Overall Quality: ${mostHelpfulReview.qualityRating}`;
+		div.appendChild(profRating);
+		const thisEasyRating = document.createElement('div');
+		thisEasyRating.classList.add('prof-rating-text');
+		thisEasyRating.textContent = `Level of Difficulty: ${mostHelpfulReview.difficultyRating}`;
+		div.appendChild(thisEasyRating);
+		if (mostHelpfulReview.rWouldTakeAgain !== 'N/A') {
+			const thisWouldTakeAgain = document.createElement('div');
+			thisWouldTakeAgain.classList.add('prof-rating-text');
+			thisWouldTakeAgain.textContent = `Would take again: ${mostHelpfulReview.iWouldTakeAgain}`;
+			div.appendChild(thisWouldTakeAgain);
+		}
+		const commentText = document.createElement('div');
+		commentText.classList.add('prof-rating-text');
+		commentText.textContent = mostHelpfulReview.comments;
+		div.appendChild(commentText);
+		const tagsText = document.createElement('div');
+		tagsText.classList.add('prof-rating-text');
+		tagsText.textContent = 'Tags: ';
+		const tags = mostHelpfulReview.ratingTags;
+		if (tags.length > 0) {
+			tagsText.textContent = ratingTags;
+			div.appendChild(tagsText);
+		}
+		const upvotesText = document.createElement('div');
+		upvotesText.classList.add('prof-rating-text');
+		upvotesText.textContent = `👍${mostHelpfulReview.totalThumbsUp} 👎${mostHelpfulReview.totalThumbsDown}`;
+		div.appendChild(upvotesText);
+	}
+	tippy(element, {
+		theme: 'light',
+		allowHTML: true,
+		placement: 'right',
+		// show delay is 500ms, hide delay is 0ms
+		delay: [500, 0],
+		onShow(instance) {
+			instance.setContent(div);
+		},
+	});
+}
+
 function AddTooltip(element, allprofRatingsURL, realFullName, profRating, numRatings, easyRating, dept) {
 	let ratings = [];
 	function getRatings(url) {
