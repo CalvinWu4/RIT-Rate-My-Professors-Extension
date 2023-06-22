@@ -33,7 +33,7 @@ export default class RMPProfessorData {
 			data.wouldTakeAgainPercentRounded,
 			data.wouldTakeAgainCount,
 			data.teacherRatingTags.map((tag) => tag.tagName),
-			data.mostUsefulRating ? RMPRatingData.fromGraphQL(data.mostHelpfulRating) : undefined,			
+			data.mostUsefulRating ? RMPRatingData.fromGraphQL(data.mostUsefulRating) : undefined,			
 		)
 	}
 

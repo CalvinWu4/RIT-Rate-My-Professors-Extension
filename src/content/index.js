@@ -377,7 +377,7 @@ function setupSingleProfToolTip(element, profData) {
 	topTagsText.classList.add('prof-rating-text');
 	topTagsText.textContent = 'Top Tags: ';
 	if (profData.topTags.length > 0) {
-		topTagsText.textContent = this.topTags.join(", ");
+		topTagsText.textContent = profData.topTags.join(", ");
 		div.appendChild(topTagsText);
 	}
 	div.appendChild(document.createElement('br'));
