@@ -1,6 +1,8 @@
 export default class RMPRatingData {
 
-	constructor(date, course, qualityRating, difficultyRating, comments, totalThumbsUp, totalThumbsDown) {
+	constructor(id, legacyID, date, course, qualityRating, difficultyRating, comments, totalThumbsUp, totalThumbsDown, isOnlineClass) {
+		this.id = id || 0;
+		this.legacyID = legacyID || "";
 		this.date = date || new Date(1970,1,1);
 		this.course = course || "";
 		this.qualityRating = qualityRating || 0;
@@ -8,11 +10,23 @@ export default class RMPRatingData {
 		this.comments = comments || "";
 		this.totalThumbsUp = totalThumbsUp || 0;
 		this.totalThumbsDown = totalThumbsDown || 0;
+		this.isOnlineClass = isOnlineClass;
 	}
 
 
 	fromGraphQL(data) {
-
+		return new RMPRatingData(
+			data.id,
+			data.legacyId,
+			data.date,
+			data.class,
+			data.qualityRating,
+			data.difficultyRatingRounded,
+			data.comment,
+			data.thumbsUpTotal,
+			data.thumbsDownTotal,
+			data.isForOnlineClass
+		);
 	}
 	
 }
