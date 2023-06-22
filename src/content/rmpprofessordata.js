@@ -1,6 +1,6 @@
 export default class RMPProfessorData {
 
-	constructor(firstName, middleName, lastName, department, qualityRating, ratingsCount, difficultyGPA, wouldTakeAgainPercentage, topTags, mostHelpfulRating) {
+	constructor(firstName, middleName, lastName, department, qualityRating, ratingsCount, difficultyGPA, wouldTakeAgainPercentage, wouldTakeAgainCount, topTags, mostHelpfulRating) {
 		this.firstName = firstName || "";
 		this.middleName = middleName || "";
 		this.lastName = lastName || "";
@@ -8,6 +8,7 @@ export default class RMPProfessorData {
 		this.qualityRating = qualityRating || 0;
 		this.ratingsCount = ratingsCount || 0;
 		this.difficultyGPA = difficultyGPA || 0.0;
+		this.wouldTakeAgainCount = wouldTakeAgainCount || 0;
 		this.wouldTakeAgainPercentage = wouldTakeAgainPercentage || 0;
 		this.topTags = topTags || [];
 		this.mostHelpfulRating = mostHelpfulRating;
