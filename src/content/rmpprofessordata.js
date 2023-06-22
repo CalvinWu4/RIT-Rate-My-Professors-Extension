@@ -19,7 +19,7 @@ export default class RMPProfessorData {
 	}
 
 
-	fromGraphQL(data) {
+	static fromGraphQL(data) {
 		return new RMPProfessorData(
 			data.id,
 			data.legacyId,

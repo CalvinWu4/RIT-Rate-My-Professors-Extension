@@ -17,7 +17,7 @@ export default class RMPRatingData {
 	}
 
 
-	fromGraphQL(data) {
+	static fromGraphQL(data) {
 		return new RMPRatingData(
 			data.id,
 			data.legacyId,
