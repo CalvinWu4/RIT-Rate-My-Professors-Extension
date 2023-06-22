@@ -29,7 +29,7 @@ for (const css of csses) {
 const urlBase = 'https://search-production.ratemyprofessors.com/solr/rmp/select/?solrformat=true&rows=2&wt=json&q=';
 const selectors = ['.col-xs-2 [href*="mailto:"]', '[ng-bind-html=\'section.instructor | RMPUrl\'] > a'];
 selectors.forEach((selector) => {
-	document.arrive(selector, function () {
+	document.arrive(selector, function (target) {
 		const fullName = replaceCustomNicknames(this.textContent.trim());
 		const splitName = fullName.split(' ');
 		const firstName = splitName[0].toLowerCase().trim();
@@ -57,7 +57,7 @@ selectors.forEach((selector) => {
 				//eventually this may be a no professor found situation
 			} else if (f.length >= 1) {
 				let profData = f[0]
-				displaySingleProfRating(this, profData);
+				displaySingleProfRating(target, profData);
 			}
 		
 		})
