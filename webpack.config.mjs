@@ -80,6 +80,14 @@ export default {
 					from: path.resolve(SRC_DIR, 'content/content.css'),
 					to: BUILD_DIR,
 				},
+				{
+					from: path.resolve(SRC_DIR, '../node_modules/tippy.js/dist/tippy.css'),
+					to: BUILD_DIR,
+				},
+				{
+					from: path.resolve(SRC_DIR, '../node_modules/tippy.js/themes/light.css'),
+					to: BUILD_DIR,
+				},
 			],
 		}),
 		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true  })

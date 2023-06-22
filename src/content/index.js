@@ -11,6 +11,19 @@ let nicknames;
 chrome.storage.local.get(['nicknames'], (result) => {
 	nicknames = result.nicknames;
 });
+let head = document.getElementsByTagName("head")[0];
+
+let csses = ["tippy.css", "light.css", "content.css"];
+
+for (const css of csses) {
+	var fileref = document.createElement("link");
+	fileref.setAttribute("rel", "stylesheet");
+	fileref.setAttribute("type", "text/css");
+	fileref.setAttribute("href", browser.runtime.getURL(css));
+	head.appendChild(fileref);
+}
+
+
 
 // Add professor ratings
 const urlBase = 'https://search-production.ratemyprofessors.com/solr/rmp/select/?solrformat=true&rows=2&wt=json&q=';

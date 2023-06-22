@@ -30,6 +30,11 @@
 			"js": [
 				"./content.bundle.js"
 			],
+			"css": [
+				"./tippy.css",
+				"./light.css",
+				"./content.css"
+			],
 			"matches": [
 				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
 				"https://schedulemaker.csh.rit.edu/*",
