@@ -25,11 +25,11 @@ To better find professors, this extension will try the first part of a hyphenate
 
 The build process goes through a few stages.
 
-If you just want to run a build, use `npm run build-dev` for development and `npm run build` for production
+If you just want to run a build, use `npm run build-dev` for development and `npm run build` for production (you'll need to `npm install` first if you haven't already).
 
-To run the extension in your browser, follow these instructions:
+To run the extension in your browser for development purposes, follow these instructions:
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
 
-Testing the output for both browsers to ensure extensions are valid can be done with `npm run test`
+Testing the output to ensure extensions are valid (using `web-ext lint`) is done automatically as part of the build process. Packaging the extension into a .zip file is also automatic.
 
