@@ -61,7 +61,11 @@ selectors.forEach((selector) => {
 			if (!professorCache[query]) {
 				// Query Rate My Professor with the professor's name
 				GetProfessorRatingNew(`${firstName} ${lastName}`)
-					.then()
+					.then((results) => {
+						professorCache[query] = results
+
+						return results;
+					})
 					.then((results) => linkProfessor(target, results))
 			} else {
 				//use cached value
