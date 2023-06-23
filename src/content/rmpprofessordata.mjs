@@ -42,8 +42,12 @@ export default class RMPProfessorData {
 		return "https://www.ratemyprofessors.com/professor/" + this.legacyID
 	}
 
-	getRatingString() {
-		return this.difficultyGPA? this.difficultyGPA : "N/A"
+	getQualityRatingString(fallback = "N/A") {
+		return this.qualityRating ? this.qualityRating : fallback
+	}
+
+	getDifficultyRatingString(fallback="N/A") {
+		return this.difficultyGPA ? this.difficultyGPA : fallback
 	}
 	
 	getFullName() {

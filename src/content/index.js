@@ -163,7 +163,7 @@ function displaySingleProfRating(element, profData){
 	element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
 
 
-	element.textContent += ` (${profData.getRatingString()})`;
+	element.textContent += ` (${profData.getDifficultyRatingString()})`;
 	element.setAttribute('href', profData.getURL());
 
 	setupSingleProfToolTip(element, profData);
@@ -185,7 +185,7 @@ function setupSingleProfToolTip(element, profData) {
 	div.appendChild(professorText);
 	const avgRatingText = document.createElement('div');
 	avgRatingText.classList.add('prof-rating-text');
-	avgRatingText.textContent = `Overall Quality: ${profData.getRatingString()}/5`;
+	avgRatingText.textContent = `Overall Quality: ${profData.getQualityRatingString("-")}/5`;
 	div.appendChild(avgRatingText);
 	const numRatingsText = document.createElement('div');
 	numRatingsText.classList.add('prof-rating-text');
