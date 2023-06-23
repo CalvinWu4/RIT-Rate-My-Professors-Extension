@@ -21,7 +21,7 @@
     "clean": "rm -rf build/*; rm -rf dist/*",
     "build:chrome": "NODE_ENV=production webpack --env browser=chrome --config webpack.config.mjs",
     "build:firefox": "NODE_ENV=production webpack --env browser=firefox --config webpack.config.mjs",
-    "build-dev:chrome": "NODE_ENV=development webpack --env browser=chrome--config webpack.config.mjs",
+    "build-dev:chrome": "NODE_ENV=development webpack --env browser=chrome --config webpack.config.mjs",
     "build-dev:firefox": "NODE_ENV=development webpack --env browser=firefox --config webpack.config.mjs",
     "release": "npm run clean && npm run build:chrome && npm run build:firefox"
   },
