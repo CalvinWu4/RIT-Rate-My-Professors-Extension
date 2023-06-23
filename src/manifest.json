@@ -6,7 +6,7 @@
 	"author": "will be filled in by webpack from package.json",
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "2f9f4409-05af-4441-82f0-13a3449dd1e6",
+			"id": "{2f9f4409-05af-4441-82f0-13a3449dd1e6}",
 			"strict_min_version": "101.0"
 		}
 	},
