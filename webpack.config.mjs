@@ -91,7 +91,12 @@ export default function (env) {
 					},
 				],
 			}),
-			new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true, overwriteDest:true  })
+			new WebExtPlugin({
+				sourceDir: BUILD_DIR,
+				artifactsDir: DIST_DIR,
+				buildPackage: true,
+				overwriteDest: true
+			})
 		],
 
 	};
