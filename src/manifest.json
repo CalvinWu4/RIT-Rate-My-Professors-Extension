@@ -33,7 +33,8 @@
 				"https://tigercenter.rit.edu/*",
 				"https://schedulemaker.csh.rit.edu/*",
 				"https://schedule.csh.rit.edu/*"
-			]
+			],
+			"use_dynamic_url": true
 		}
 	],
 	"content_scripts": [
