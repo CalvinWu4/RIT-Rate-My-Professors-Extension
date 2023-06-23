@@ -14,7 +14,9 @@ export default class RMPProfessorData {
 		this.ratingsCount = ratingsCount || 0;
 		this.difficultyGPA = difficultyGPA;
 		this.wouldTakeAgainCount = wouldTakeAgainCount || 0;
-		this.wouldTakeAgainPercentage = wouldTakeAgainPercentage || 0;
+		if (wouldTakeAgainPercentage >= 0) {
+			this.wouldTakeAgainPercentage = wouldTakeAgainPercentage;
+		}
 		this.topTags = topTags || [];
 		this.mostHelpfulRating = mostHelpfulRating;
 	}

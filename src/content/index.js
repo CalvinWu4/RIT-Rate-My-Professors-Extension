@@ -202,7 +202,7 @@ function setupSingleProfToolTip(element, profData) {
 	wouldTakeAgainText.classList.add('prof-rating-text');
 	
 
-	wouldTakeAgainText.textContent = `Would take again: ${profData.wouldTakeAgainPercentage}%`;
+	wouldTakeAgainText.textContent = `Would take again: ${profData.wouldTakeAgainPercentage ?? "N/A"}%`;
 	div.appendChild(wouldTakeAgainText);
 	const topTagsText = document.createElement('div');
 	topTagsText.classList.add('prof-rating-text');
