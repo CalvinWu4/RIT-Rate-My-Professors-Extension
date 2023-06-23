@@ -24,7 +24,10 @@
 			"resources": [
 				"./tippy.css",
 				"./light.css",
-				"./content.css"
+				"./content.css",
+				"./content.bundle.js.map",
+				"./background.bundle.js.map",
+				"./background.bundle.js.LICENSE.txt"
 			],
 			"matches": [
 				"https://tigercenter.rit.edu/*",
