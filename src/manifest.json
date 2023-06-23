@@ -21,8 +21,16 @@
 	],
 	"web_accessible_resources": [
 		{
-			"resources": ["./content/content.css"],
-			"matches": ["<all_urls>"]
+			"resources": [
+				"./tippy.css",
+				"./light.css",
+				"./content.css"
+			],
+			"matches": [
+				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
+				"https://schedulemaker.csh.rit.edu/*",
+				"https://schedule.csh.rit.edu/*"
+			]
 		}
 	],
 	"content_scripts": [
