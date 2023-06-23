@@ -1,6 +1,6 @@
 {
   "name": "rit-rate-my-professor-extension",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Shows the Rate My Professors rating of RIT professors while searching for classes on Tiger Center and CSH Schedule Maker.",
   "author": "Calvin Wu",
   "private": true,
