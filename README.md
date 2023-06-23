@@ -25,7 +25,13 @@ To better find professors, this extension will try the first part of a hyphenate
 
 The build process goes through a few stages.
 
-If you just want to run a build, use `npm run build-dev` for development and `npm run build` for production (you'll need to `npm install` first if you haven't already).
+If you just want to run a build, use one of the following commands based on whether you want dev/prod builds and what browser you are building for:
+- `npm run build-dev:chrome`
+- `npm run build-dev:firefox`
+- `npm run build:chrome`
+- `npm run build:firefox`
+
+You'll probably want to `npm install` first if you haven't already.
 
 To run the extension in your browser for development purposes, follow these instructions:
 
