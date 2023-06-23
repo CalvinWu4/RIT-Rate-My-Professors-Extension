@@ -1,8 +1,6 @@
 import { replaceCustomNicknames } from './addedNicknames';
 import RMPProfessorData from './rmpprofessordata';
 
-import { getNameCombos } from './utils';
-
 import 'arrive';
 import tippy from 'tippy.js';
 
