@@ -23,9 +23,6 @@ for (const css of csses) {
 }
 
 
-// on each page load the responses for each professor are saved here so they dont have to be fetched again 
-let professorCache = {}
-
 
 // Add professor ratings
 const urlBase = 'https://search-production.ratemyprofessors.com/solr/rmp/select/?solrformat=true&rows=2&wt=json&q=';
@@ -53,40 +50,23 @@ selectors.forEach((selector) => {
 		const middleAndLastNameCombosIndex = 0;
 		const tryMiddleNameAsFirst = true;
 
-		let query = `${firstName} ${lastName}`
-	
 		//dont make a query if there was no valid name to use
 		if (profname != ""){
-			//check if the professor is cached first
-			if (!professorCache[query]) {
-				// Query Rate My Professor with the professor's name
-				GetProfessorRatingNew(`${firstName} ${lastName}`)
-					.then((results) => {
-						professorCache[query] = results
+			// Query Rate My Professor with the professor's name
+			GetProfessorRatingNew(`${firstName} ${lastName}`).then((f) => {
+				if (f.length == 0) {
+					//retry some other names on the list
 
-						return results;
-					})
-					.then((results) => linkProfessor(target, results))
-			} else {
-				//use cached value
-				linkProfessor(target, professorCache[query])
-			}
+					//eventually this may be a no professor found situation
+				} else if (f.length >= 1) {
+					let profData = f[0]
+					displaySingleProfRating(target, profData);
+				}
+			
+			})
 		}
 	});
 });
-
-
-function linkProfessor(target, results) {
-	if (results.length == 0) {
-		//retry some other names on the list
-
-		//eventually this may be a no professor found situation
-	} else if (results.length >= 1) {
-		let profData = results[0]
-		displaySingleProfRating(target, profData);
-	}
-
-}
 
 async function GetProfessorRatingNew (searchterm) {
 	const query = `query NewSearchTeachersQuery(
