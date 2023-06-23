@@ -1,5 +1,5 @@
-import { replaceCustomNicknames } from './addedNicknames';
-import RMPProfessorData from './rmpprofessordata';
+import { replaceCustomNicknames } from './utils.mjs';
+import RMPProfessorData from "./rmpprofessordata.mjs"
 import browser from "webextension-polyfill";
 
 import 'arrive';

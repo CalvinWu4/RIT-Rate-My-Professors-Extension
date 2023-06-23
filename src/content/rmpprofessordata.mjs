@@ -1,4 +1,4 @@
-import RMPRatingData from "./rmpratingdata";
+import RMPRatingData from "./rmpratingdata.mjs";
 
 export default class RMPProfessorData {
 
