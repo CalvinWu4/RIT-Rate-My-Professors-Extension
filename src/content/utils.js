@@ -1,3 +1,19 @@
+
+const customNames = {
+	'Thiagarajah Arujunan': 'Al Arujunan',
+	'Abdulmutalib Masaud-Wahaishi': 'Abdul Wahaishi',
+};
+
+export function replaceCustomNicknames(fullName) {
+	if (customNames[fullName]) {
+		return customNames[fullName];
+	}
+
+	return fullName;
+}
+
+
+
 // Return all possible non-null subset combos from an array
 function combinations(array) {
 	let combos = new Array(1 << array.length).fill().map(
