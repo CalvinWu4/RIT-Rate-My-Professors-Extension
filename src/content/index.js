@@ -1,4 +1,4 @@
-import { replaceCustomNicknames } from './utils.mjs';
+import { filterNonProfessors, replaceCustomNicknames } from './utils.mjs';
 import RMPProfessorData from "./rmpprofessordata.mjs"
 import browser from "webextension-polyfill";
 
@@ -29,8 +29,9 @@ const urlBase = 'https://search-production.ratemyprofessors.com/solr/rmp/select/
 const selectors = ['.col-xs-2 [href*="mailto:"]', '[ng-bind-html=\'section.instructor | RMPUrl\'] > a'];
 selectors.forEach((selector) => {
 	document.arrive(selector, function (target) {
-		const fullName = replaceCustomNicknames(this.textContent.trim());
-		const splitName = fullName.split(' ');
+		let profname = filterNonProfessors(target.textContent.trim());
+		profname = replaceCustomNicknames(profname);
+		const splitName = profname.split(' ');
 		const firstName = splitName[0].toLowerCase().trim();
 		const lastName = splitName.slice(-1)[0].toLowerCase().trim();
 		let middleNames = [];
@@ -48,18 +49,22 @@ selectors.forEach((selector) => {
 		const nicknamesIndex = 0;
 		const middleAndLastNameCombosIndex = 0;
 		const tryMiddleNameAsFirst = true;
-		// Query Rate My Professor with the professor's name
-		GetProfessorRatingNew(`${firstName} ${lastName}`).then((f) => {
-			if (f.length == 0) {
-				//retry some other names on the list
 
-				//eventually this may be a no professor found situation
-			} else if (f.length >= 1) {
-				let profData = f[0]
-				displaySingleProfRating(target, profData);
-			}
-		
-		})
+		//dont make a query if there was no valid name to use
+		if (profname != ""){
+			// Query Rate My Professor with the professor's name
+			GetProfessorRatingNew(`${firstName} ${lastName}`).then((f) => {
+				if (f.length == 0) {
+					//retry some other names on the list
+
+					//eventually this may be a no professor found situation
+				} else if (f.length >= 1) {
+					let profData = f[0]
+					displaySingleProfRating(target, profData);
+				}
+			
+			})
+		}
 	});
 });
 
