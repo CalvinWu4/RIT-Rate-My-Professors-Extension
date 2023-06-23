@@ -18,6 +18,10 @@ export function replaceCustomNicknames(fullName) {
 	return fullName;
 }
 
+export function roundTo(number, places){
+	return Math.round(number * Math.pow(10, places)) / Math.pow(10, places);
+}
+
 /**
  * 	Filter out names that are not valid names
  * @param {*} input the input string to evaluate

@@ -1,3 +1,5 @@
+import { roundTo } from "./utils.mjs";
+
 export default class RMPRatingData {
 
 	constructor(id, legacyID, date, course, qualityRating, difficultyRating, comments, totalThumbsUp, totalThumbsDown, ratingTags, isOnlineClass, iWouldTakeAgain) {
@@ -23,8 +25,8 @@ export default class RMPRatingData {
 			data.legacyId,
 			data.date,
 			data.class,
-			data.qualityRating,
-			data.difficultyRatingRounded,
+			roundTo(data.qualityRating,2),
+			roundTo(data.difficultyRatingRounded,2),
 			data.comment,
 			data.thumbsUpTotal,
 			data.thumbsDownTotal,

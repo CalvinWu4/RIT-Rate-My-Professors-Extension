@@ -1,4 +1,5 @@
 import RMPRatingData from "./rmpratingdata.mjs";
+import { roundTo } from "./utils.mjs";
 
 export default class RMPProfessorData {
 
@@ -27,10 +28,10 @@ export default class RMPProfessorData {
 			"",
 			data.lastName,
 			data.department,
-			data.avgRatingRounded,
+			roundTo(data.avgRatingRounded,2),
 			data.numRatings,
-			data.avgDifficultyRounded,
-			data.wouldTakeAgainPercentRounded,
+			roundTo(data.avgDifficultyRounded, 2),
+			roundTo(data.wouldTakeAgainPercentRounded, 2),
 			data.wouldTakeAgainCount,
 			data.teacherRatingTags.map((tag) => tag.tagName),
 			data.mostUsefulRating ? RMPRatingData.fromGraphQL(data.mostUsefulRating) : undefined,			
