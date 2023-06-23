@@ -19,8 +19,10 @@
   },
   "scripts": {
     "clean": "rm -rf build/*; rm -rf dist/*",
-    "build": "NODE_ENV=production webpack --config webpack.config.mjs",
-    "build-dev": "NODE_ENV=development webpack --config webpack.config.mjs"
+    "build:chrome": "NODE_ENV=production webpack --env browser=chrome --config webpack.config.mjs",
+    "build:firefox": "NODE_ENV=production webpack --env browser=firefox --config webpack.config.mjs",
+    "build-dev:chrome": "NODE_ENV=development webpack --env browser=chrome--config webpack.config.mjs",
+    "build-dev:firefox": "NODE_ENV=development webpack --env browser=chrome --config webpack.config.mjs"
   },
   "repository": {
     "type": "git",

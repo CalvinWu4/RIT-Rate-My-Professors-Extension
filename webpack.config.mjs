@@ -34,7 +34,7 @@ function transformName(input) {
 	return names.join(' ');
 }
 
-function modify(buffer) {
+function modify(buffer, isFirefox) {
 	// copy-webpack-plugin passes a buffer
 	const manifest = JSON.parse(buffer.toString());
 
@@ -44,11 +44,18 @@ function modify(buffer) {
 	manifest.author = pkgjson.author;
 	manifest.name = transformName(pkgjson.name);
 
+	if (!isFirefox) {
+		manifest.background.service_worker = manifest.background.scripts[0];
+		delete manifest.background.scripts;
+	}
+
 	// pretty print to JSON with two spaces
 	return JSON.stringify(manifest, null, 2);
 }
 
 export default function (env) {
+	if (!env.browser) env.browser = "chrome";
+
 	return {
 		// For some reason, webpack insists on having an entrypoint and making some JS
 		// here we give it an entrypoint it cant make anything useful from and then later we use
@@ -70,7 +77,7 @@ export default function (env) {
 						from: manifestPath,
 						to: BUILD_DIR,
 						transform(content) {
-							return modify(content);
+							return modify(content, env.browser === "firefox");
 						},
 					},
 					{
@@ -95,7 +102,9 @@ export default function (env) {
 				sourceDir: BUILD_DIR,
 				artifactsDir: DIST_DIR,
 				buildPackage: true,
-				overwriteDest: true
+				overwriteDest: true,
+				runLint: env.browser === 'firefox',
+				outputFilename: `${pkgjson.name}_${pkgjson.version}_${env.browser === 'firefox' ? "firefox" : "chrome"}.zip`
 			})
 		],
 
