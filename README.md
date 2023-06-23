@@ -33,6 +33,8 @@ If you just want to run a build, use one of the following commands based on whet
 
 You'll probably want to `npm install` first if you haven't already.
 
+`npm run release` will run the `clean`, `build:chrome`, and `build:firefox` targets to generate two production zip files from a clean build folder which should be ready for distribution
+
 To run the extension in your browser for development purposes, follow these instructions:
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
