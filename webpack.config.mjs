@@ -48,49 +48,51 @@ function modify(buffer) {
 	return JSON.stringify(manifest, null, 2);
 }
 
-export default {
-	// For some reason, webpack insists on having an entrypoint and making some JS
-	// here we give it an entrypoint it cant make anything useful from and then later we use
-	// FileManagerPlugin to delete the generated file
-	// webpack is only being used to copy data from package.json into manifest.json
-	entry: {
-		background: './src/background/index.js',
-		content: './src/content/index.js',
-	},
-	devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-source-map',
-	output: {
-		filename: '[name].bundle.js',
-		path: BUILD_DIR,
-	},
-	plugins: [
-		new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: manifestPath,
-					to: BUILD_DIR,
-					transform(content) {
-						return modify(content);
+export default function (env) {
+	return {
+		// For some reason, webpack insists on having an entrypoint and making some JS
+		// here we give it an entrypoint it cant make anything useful from and then later we use
+		// FileManagerPlugin to delete the generated file
+		// webpack is only being used to copy data from package.json into manifest.json
+		entry: {
+			background: './src/background/index.js',
+			content: './src/content/index.js',
+		},
+		devtool: env.production ? 'source-map' : 'cheap-source-map',
+		output: {
+			filename: '[name].bundle.js',
+			path: BUILD_DIR,
+		},
+		plugins: [
+			new CopyWebpackPlugin({
+				patterns: [
+					{
+						from: manifestPath,
+						to: BUILD_DIR,
+						transform(content) {
+							return modify(content);
+						},
 					},
-				},
-				{
-					from: IMG_DIR,
-					to: path.join(BUILD_DIR, 'images'),
-				},
-				{
-					from: path.resolve(SRC_DIR, 'content/content.css'),
-					to: BUILD_DIR,
-				},
-				{
-					from: path.resolve(SRC_DIR, '../node_modules/tippy.js/dist/tippy.css'),
-					to: BUILD_DIR,
-				},
-				{
-					from: path.resolve(SRC_DIR, '../node_modules/tippy.js/themes/light.css'),
-					to: BUILD_DIR,
-				},
-			],
-		}),
-		new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true, overwriteDest:true  })
-	],
+					{
+						from: IMG_DIR,
+						to: path.join(BUILD_DIR, 'images'),
+					},
+					{
+						from: path.resolve(SRC_DIR, 'content/content.css'),
+						to: BUILD_DIR,
+					},
+					{
+						from: path.resolve(SRC_DIR, '../node_modules/tippy.js/dist/tippy.css'),
+						to: BUILD_DIR,
+					},
+					{
+						from: path.resolve(SRC_DIR, '../node_modules/tippy.js/themes/light.css'),
+						to: BUILD_DIR,
+					},
+				],
+			}),
+			new WebExtPlugin({ sourceDir: BUILD_DIR, artifactsDir: DIST_DIR, buildPackage: true, overwriteDest:true  })
+		],
 
-};
+	};
+}
