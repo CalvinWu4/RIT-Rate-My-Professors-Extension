@@ -104,7 +104,7 @@ export default function (env) {
 				buildPackage: true,
 				overwriteDest: true,
 				runLint: env.browser === 'firefox',
-				outputFilename: `${pkgjson.name}_${pkgjson.version}_${env.browser === 'firefox' ? "firefox" : "chrome"}.zip`
+				outputFilename: `${pkgjson.name}_${pkgjson.version}_${env.browser === 'firefox' ? "firefox" : "chrome"}${!env.production?"_DEV":""}.zip`
 			})
 		],
 
