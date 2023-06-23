@@ -18,6 +18,22 @@ export function replaceCustomNicknames(fullName) {
 	return fullName;
 }
 
+/**
+ * 	Filter out names that are not valid names
+ * @param {*} input the input string to evaluate
+ * @returns the input if it is valid, or an empty string if invalid 
+ */
+export function filterNonProfessors(input) {
+	const nonprofs = [
+		"TBA",
+		"- To Be Determined",
+		"undefined"
+	];
+	if (nonprofs.includes(input)) {
+		return ""
+	}
+	return input
+}
 
 
 // Return all possible non-null subset combos from an array
