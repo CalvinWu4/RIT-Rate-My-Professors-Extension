@@ -41,3 +41,4 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_firs
 
 Testing the output to ensure extensions are valid (using `web-ext lint`) is done automatically as part of the build process. Packaging the extension into a .zip file is also automatic.
 
+To run unit tests: `npm run test`
