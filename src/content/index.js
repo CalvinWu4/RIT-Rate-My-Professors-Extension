@@ -1,5 +1,6 @@
 import { replaceCustomNicknames } from './addedNicknames';
 import RMPProfessorData from './rmpprofessordata';
+import browser from "webextension-polyfill";
 
 import 'arrive';
 import tippy from 'tippy.js';

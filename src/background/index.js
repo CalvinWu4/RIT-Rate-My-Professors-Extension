@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import browser from "webextension-polyfill";
 
 function handleMessage (data, sender, sendResponse) {
 	if (data.type === "graphql") {
