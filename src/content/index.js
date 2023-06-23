@@ -1,4 +1,4 @@
-import { replaceCustomNicknames } from './addedNicknames';
+import { replaceCustomNicknames } from './utils';
 import RMPProfessorData from './rmpprofessordata';
 import browser from "webextension-polyfill";
 
