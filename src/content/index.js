@@ -53,20 +53,23 @@ selectors.forEach((selector) => {
 		//dont make a query if there was no valid name to use
 		if (profname != ""){
 			// Query Rate My Professor with the professor's name
-			GetProfessorRatingNew(`${firstName} ${lastName}`).then((f) => {
-				if (f.length == 0) {
-					//retry some other names on the list
-
-					//eventually this may be a no professor found situation
-				} else if (f.length >= 1) {
-					let profData = f[0]
-					displaySingleProfRating(target, profData);
-				}
-			
-			})
+			GetProfessorRatingNew(`${firstName} ${lastName}`).then((results) => linkProfessor(target, results))
 		}
 	});
 });
+
+
+function linkProfessor(target, results) {
+	if (results.length == 0) {
+		//retry some other names on the list
+
+		//eventually this may be a no professor found situation
+	} else if (results.length >= 1) {
+		let profData = results[0]
+		displaySingleProfRating(target, profData);
+	}
+
+}
 
 async function GetProfessorRatingNew (searchterm) {
 	const query = `query NewSearchTeachersQuery(
