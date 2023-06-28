@@ -182,82 +182,81 @@ function createToolTipElement(textContent, isTitle = false) {
 }
 
 function setupSingleProfToolTip(element, profData) {
-	let wouldTakeAgainText;
-	let easyRatingText;
 
 	const div = document.createElement('div');
-	const title = document.createElement('div');
-	title.classList.add('prof-rating-title');
-	title.textContent = 'Rate My Professor Details';
-	div.appendChild(title);
+	div.appendChild(
+		createToolTipElement('Rate My Professor Details', true)
+	);
 
-	const professorText = document.createElement('div');
-	professorText.classList.add('prof-rating-text');
-	professorText.textContent = `${profData.getFullName()}, Professor in ${profData.department}`;
-	div.appendChild(professorText);
-	const avgRatingText = document.createElement('div');
-	avgRatingText.classList.add('prof-rating-text');
-	avgRatingText.textContent = `Overall Quality: ${profData.getQualityRatingString("-")}/5`;
-	div.appendChild(avgRatingText);
-	const numRatingsText = document.createElement('div');
-	numRatingsText.classList.add('prof-rating-text');
-	numRatingsText.textContent = `Number of Ratings: ${profData.ratingsCount}`;
-	div.appendChild(numRatingsText);
+	div.appendChild(
+		createToolTipElement(`${profData.getFullName()}, Professor in ${profData.department}`)
+	);
 
+	div.appendChild(
+		createToolTipElement(`Overall Quality: ${profData.getQualityRatingString("-")}/5`)
+	);
 	
+	div.appendChild(
+		createToolTipElement(`Number of Ratings: ${profData.ratingsCount}`)
+	);
 
-	easyRatingText = document.createElement('div');
-	easyRatingText.classList.add('prof-rating-text');
-	easyRatingText.textContent = `Level of Difficulty: ${profData.difficultyGPA}`;
-	div.appendChild(easyRatingText);
-	wouldTakeAgainText = createToolTipElement(`Would take again: ${profData.wouldTakeAgainPercentage ?? "N/A"}%`)
-	div.appendChild(wouldTakeAgainText);
-	const topTagsText = document.createElement('div');
-	topTagsText.classList.add('prof-rating-text');
-	topTagsText.textContent = 'Top Tags: ';
+	div.appendChild(
+		createToolTipElement(`Level of Difficulty: ${profData.difficultyGPA}`)
+	);
+
+	div.appendChild(
+		createToolTipElement(`Would take again: ${profData.wouldTakeAgainPercentage ?? "N/A"}%`)
+	);
+
+	let topTagsText = 'Top Tags: '; 
 	if (profData.topTags.length > 0) {
 		topTagsText.textContent = profData.topTags.join(", ");
-		div.appendChild(topTagsText);
+		div.appendChild(
+			createToolTipElement(topTagsText)
+		);
 	}
+
 	div.appendChild(document.createElement('br'));
-	
+
 	if (profData.mostHelpfulRating) {
 		const mostHelpfulReview = profData.mostHelpfulRating
-		const classText = document.createElement('div');
-		classText.classList.add('prof-rating-text');
-		classText.textContent = `Most Helpful Rating: ${mostHelpfulReview.course
-			}${mostHelpfulReview.isOnlineClass ? ' (Online)' : ''}`; // Mark if class was online
-		div.appendChild(classText);
-		const dateText = document.createElement('div');
-		dateText.classList.add('prof-rating-text');
-		dateText.textContent = mostHelpfulReview.date.toLocaleDateString();
-		div.appendChild(dateText);
-		const profRating = document.createElement('div');
-		profRating.classList.add('prof-rating-text');
-		profRating.textContent = `Overall Quality: ${mostHelpfulReview.qualityRating}`;
-		div.appendChild(profRating);
-		const thisEasyRating = document.createElement('div');
-		thisEasyRating.classList.add('prof-rating-text');
-		thisEasyRating.textContent = `Level of Difficulty: ${mostHelpfulReview.difficultyRating}`;
-		div.appendChild(thisEasyRating);
+		// Mark if class was online
+		div.appendChild(
+			createToolTipElement(`Most Helpful Rating: ${mostHelpfulReview.course
+				}${mostHelpfulReview.isOnlineClass ? ' (Online)' : ''}`)
+		);
+		
+		div.appendChild(
+			createToolTipElement(mostHelpfulReview.date.toLocaleDateString())
+		);
+		
+		div.appendChild(
+			createToolTipElement(`Overall Quality: ${mostHelpfulReview.qualityRating}`)
+		);
+
+		div.appendChild(
+			createToolTipElement(`Level of Difficulty: ${mostHelpfulReview.difficultyRating}`)
+		);
+
 		if (mostHelpfulReview.iWouldTakeAgain) {
-			const thisWouldTakeAgain = createToolTipElement(`Would take again: ${mostHelpfulReview.iWouldTakeAgain ? "Yes" : "No"}`)
-			div.appendChild(thisWouldTakeAgain);
+			div.appendChild(
+				createToolTipElement(`Would take again: ${mostHelpfulReview.iWouldTakeAgain ? "Yes" : "No"}`)
+			);
 		}
-		const commentText = document.createElement('div');
-		commentText.classList.add('prof-rating-text');
-		commentText.textContent = mostHelpfulReview.comments;
-		div.appendChild(commentText);
+
+		div.appendChild(
+			createToolTipElement(mostHelpfulReview.comments)
+		);
+
 		if (mostHelpfulReview.ratingTags !== "") {
-			const tagsText = document.createElement('div');
-			tagsText.classList.add('prof-rating-text');
-			tagsText.textContent = 'Tags: ' + mostHelpfulReview.ratingTags;
-			div.appendChild(tagsText);
+			div.appendChild(
+				createToolTipElement('Tags: ' + mostHelpfulReview.ratingTags)
+			);
 		}
-		const upvotesText = document.createElement('div');
-		upvotesText.classList.add('prof-rating-text');
-		upvotesText.textContent = `👍${mostHelpfulReview.totalThumbsUp} 👎${mostHelpfulReview.totalThumbsDown}`;
-		div.appendChild(upvotesText);
+
+		div.appendChild(
+			createToolTipElement(`👍${mostHelpfulReview.totalThumbsUp} 👎${mostHelpfulReview.totalThumbsDown}`)
+		);
 	}
 	tippy(element, {
 		theme: 'light',
