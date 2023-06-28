@@ -172,6 +172,15 @@ function displaySingleProfRating(element, profData){
 	setupSingleProfToolTip(element, profData);
 }
 
+function createWouldTakeAgainElement(percentageThatWouldTakeAgain) {
+	const wouldTakeAgainText = document.createElement('div');
+	wouldTakeAgainText.classList.add('prof-rating-text');
+
+
+	wouldTakeAgainText.textContent = `Would take again: ${percentageThatWouldTakeAgain ?? "N/A"}`;
+	return wouldTakeAgainText
+}
+
 function setupSingleProfToolTip(element, profData) {
 	let wouldTakeAgainText;
 	let easyRatingText;
@@ -201,11 +210,7 @@ function setupSingleProfToolTip(element, profData) {
 	easyRatingText.classList.add('prof-rating-text');
 	easyRatingText.textContent = `Level of Difficulty: ${profData.difficultyGPA}`;
 	div.appendChild(easyRatingText);
-	wouldTakeAgainText = document.createElement('div');
-	wouldTakeAgainText.classList.add('prof-rating-text');
-	
-
-	wouldTakeAgainText.textContent = `Would take again: ${profData.wouldTakeAgainPercentage ?? "N/A"}%`;
+	wouldTakeAgainText = createWouldTakeAgainElement(profData.wouldTakeAgainPercentage + "%")
 	div.appendChild(wouldTakeAgainText);
 	const topTagsText = document.createElement('div');
 	topTagsText.classList.add('prof-rating-text');
@@ -235,10 +240,8 @@ function setupSingleProfToolTip(element, profData) {
 		thisEasyRating.classList.add('prof-rating-text');
 		thisEasyRating.textContent = `Level of Difficulty: ${mostHelpfulReview.difficultyRating}`;
 		div.appendChild(thisEasyRating);
-		if (mostHelpfulReview.rWouldTakeAgain !== 'N/A') {
-			const thisWouldTakeAgain = document.createElement('div');
-			thisWouldTakeAgain.classList.add('prof-rating-text');
-			thisWouldTakeAgain.textContent = `Would take again: ${mostHelpfulReview.iWouldTakeAgain}`;
+		if (mostHelpfulReview.iWouldTakeAgain) {
+			const thisWouldTakeAgain = createWouldTakeAgainElement(mostHelpfulReview.iWouldTakeAgain? "Yes": "No")
 			div.appendChild(thisWouldTakeAgain);
 		}
 		const commentText = document.createElement('div');
