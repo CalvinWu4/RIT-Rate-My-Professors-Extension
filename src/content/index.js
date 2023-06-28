@@ -172,13 +172,17 @@ function displaySingleProfRating(element, profData){
 	setupSingleProfToolTip(element, profData);
 }
 
+function createToolTipElement(textContent, isTitle = false) {
+	const tooltipElement = document.createElement('div');
+
+	tooltipElement.classList.add(isTitle ? 'prof-rating-title' : 'prof-rating-text');
+
+	tooltipElement.textContent = textContent;
+	return tooltipElement
+}
+
 function createWouldTakeAgainElement(percentageThatWouldTakeAgain) {
-	const wouldTakeAgainText = document.createElement('div');
-	wouldTakeAgainText.classList.add('prof-rating-text');
-
-
-	wouldTakeAgainText.textContent = `Would take again: ${percentageThatWouldTakeAgain ?? "N/A"}`;
-	return wouldTakeAgainText
+	return createToolTipElement(`Would take again: ${percentageThatWouldTakeAgain ?? "N/A"}`);
 }
 
 function setupSingleProfToolTip(element, profData) {
