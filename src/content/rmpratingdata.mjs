@@ -5,7 +5,7 @@ export default class RMPRatingData {
 	constructor(id, legacyID, date, course, qualityRating, difficultyRating, comments, totalThumbsUp, totalThumbsDown, ratingTags, isOnlineClass, iWouldTakeAgain) {
 		this.id = id || 0;
 		this.legacyID = legacyID || "";
-		this.date = date || new Date(1970,1,1);
+		this.date = date;
 		this.course = course || "";
 		this.qualityRating = qualityRating || 0;
 		this.difficultyRating = difficultyRating || 0;
@@ -23,7 +23,7 @@ export default class RMPRatingData {
 		return new RMPRatingData(
 			data.id,
 			data.legacyId,
-			data.date,
+			new Date(data.date),
 			data.class,
 			roundTo(data.qualityRating,2),
 			roundTo(data.difficultyRatingRounded,2),
