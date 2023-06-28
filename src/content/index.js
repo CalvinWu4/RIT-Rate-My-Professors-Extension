@@ -230,7 +230,7 @@ function setupSingleProfToolTip(element, profData) {
 		div.appendChild(classText);
 		const dateText = document.createElement('div');
 		dateText.classList.add('prof-rating-text');
-		dateText.textContent = mostHelpfulReview.date; //TODO: maybe convert to string date
+		dateText.textContent = mostHelpfulReview.date.toLocaleDateString();
 		div.appendChild(dateText);
 		const profRating = document.createElement('div');
 		profRating.classList.add('prof-rating-text');
