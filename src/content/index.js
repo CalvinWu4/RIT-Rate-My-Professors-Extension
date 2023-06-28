@@ -248,12 +248,10 @@ function setupSingleProfToolTip(element, profData) {
 		commentText.classList.add('prof-rating-text');
 		commentText.textContent = mostHelpfulReview.comments;
 		div.appendChild(commentText);
-		const tagsText = document.createElement('div');
-		tagsText.classList.add('prof-rating-text');
-		tagsText.textContent = 'Tags: ';
-		const tags = mostHelpfulReview.ratingTags;
-		if (tags.length > 0) {
-			tagsText.textContent = ratingTags;
+		if (mostHelpfulReview.ratingTags !== "") {
+			const tagsText = document.createElement('div');
+			tagsText.classList.add('prof-rating-text');
+			tagsText.textContent = 'Tags: ' + mostHelpfulReview.ratingTags;
 			div.appendChild(tagsText);
 		}
 		const upvotesText = document.createElement('div');
