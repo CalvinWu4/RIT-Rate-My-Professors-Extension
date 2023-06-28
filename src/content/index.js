@@ -51,7 +51,7 @@ selectors.forEach((selector) => {
 		const tryMiddleNameAsFirst = true;
 
 		//dont make a query if there was no valid name to use
-		if (profname != ""){
+		if (profname != "") {
 			// Query Rate My Professor with the professor's name
 			GetProfessorRatingNew(`${firstName} ${lastName}`).then((results) => linkProfessor(target, results))
 		}
@@ -71,7 +71,7 @@ function linkProfessor(target, results) {
 
 }
 
-async function GetProfessorRatingNew (searchterm) {
+async function GetProfessorRatingNew(searchterm) {
 	const query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
@@ -159,7 +159,7 @@ function normalizeGraphQLData(data) {
 
 
 ///assumes that there is one prof data object provided
-function displaySingleProfRating(element, profData){
+function displaySingleProfRating(element, profData) {
 
 	element.setAttribute('target', '_blank');
 	element.classList.add('blueText');
