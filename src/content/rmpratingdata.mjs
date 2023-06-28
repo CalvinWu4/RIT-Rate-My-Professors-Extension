@@ -30,7 +30,9 @@ export default class RMPRatingData {
 			data.comment,
 			data.thumbsUpTotal,
 			data.thumbsDownTotal,
-			data.isForOnlineClass
+			data.ratingTags,//string
+			data.isForOnlineClass,
+			data.iWouldTakeAgain
 		);
 	}
 	
