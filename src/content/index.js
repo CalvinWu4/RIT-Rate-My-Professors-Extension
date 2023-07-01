@@ -210,7 +210,7 @@ function setupSingleProfToolTip(element, profData) {
 
 	let topTagsText = 'Top Tags: '; 
 	if (profData.topTags.length > 0) {
-		topTagsText.textContent = profData.topTags.join(", ");
+		topTagsText += profData.topTags.join(", ");
 		div.appendChild(
 			createToolTipElement(topTagsText)
 		);
