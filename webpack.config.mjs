@@ -103,7 +103,7 @@ export default function (env) {
 				artifactsDir: DIST_DIR,
 				buildPackage: true,
 				overwriteDest: true,
-				runLint: env.browser === 'firefox',
+				ignoreKnownChromeLintFailures: true,
 				outputFilename: `${pkgjson.name}_${pkgjson.version}_${env.browser === 'firefox' ? "firefox" : "chrome"}${!env.production?"_DEV":""}.zip`
 			})
 		],
