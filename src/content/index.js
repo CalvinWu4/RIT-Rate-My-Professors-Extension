@@ -166,7 +166,7 @@ function displaySingleProfRating(element, profData) {
 	element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
 
 
-	element.textContent += ` (${profData.getDifficultyRatingString()})`;
+	element.textContent += ` (${profData.getQualityRatingString()})`;
 	element.setAttribute('href', profData.getURL());
 
 	setupSingleProfToolTip(element, profData);
