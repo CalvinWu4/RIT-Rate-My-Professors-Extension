@@ -62,7 +62,13 @@ function linkProfessor(target, results) {
 
 }
 
-async function GetProfessorRating(searchterm) {
+/**
+ * perform a single query to RateMyProfessors
+ * @param {string} searchterm the search term to use (usually a professor's name)
+ * @param {string} schoolId the ID of the school to limit the search to (i.e. 'U2Nob29sLTgwNw==')
+ * @returns a promise that returns a list of RMPProfessorData objects
+ */
+async function GetProfessorRating(searchterm, schoolId) {
 	const query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
@@ -120,14 +126,18 @@ async function GetProfessorRating(searchterm) {
 	}
 }`;
 
+	const queryVars = {
+		text: searchterm,
+	}
+
+	if (schoolId) {
+		queryVars.schoolID = schoolId
+	}
 
 	const body = JSON.stringify({
 		query,
 		variables: {
-			query: {
-				text: searchterm,
-				schoolID: 'U2Nob29sLTgwNw==',
-			},
+			query: queryVars,
 		}
 	});
 
