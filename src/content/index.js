@@ -53,7 +53,7 @@ selectors.forEach((selector) => {
 		//dont make a query if there was no valid name to use
 		if (profname != "") {
 			// Query Rate My Professor with the professor's name
-			GetProfessorRatingNew(`${firstName} ${lastName}`).then((results) => linkProfessor(target, results))
+			GetProfessorRating(`${firstName} ${lastName}`).then((results) => linkProfessor(target, results))
 		}
 	});
 });
@@ -71,7 +71,7 @@ function linkProfessor(target, results) {
 
 }
 
-async function GetProfessorRatingNew(searchterm) {
+async function GetProfessorRating(searchterm) {
 	const query = `query NewSearchTeachersQuery(
     $query: TeacherSearchQuery!
 ) {
