@@ -67,3 +67,26 @@ export function getNameCombos(nameArray) {
 
 	return nameArray.filter((combo) => !isSubset(combo));
 }
+
+
+/**
+ * Given a list of name parts (i.e. first, some number of middle names, and last), return an ordered list of strings built from those components sorted by most likely to be a match
+ * @param {*} nameComponents a list of strings representing name parts, i.e. ['Tom', 'Holland']
+ */
+function createProfessorSearchStrings(nameComponents) {
+
+	const firstName = splitName[0];
+	const lastName = splitName[splitName.length - 1];
+	let middleNames = []
+	if (splitName.length > 2) {
+		middleNames = splitName.slice(1, splitName.length - 1);
+	}
+
+	let nonParticleMiddleNames = middleNames.filter((name) => !isSurnameParticle(val))
+
+	let searchStrings = []
+
+	// [First Name] [Last Name]
+	searchStrings.push(`${firstName} ${lastName}`)
+	return searchStrings
+}
