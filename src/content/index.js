@@ -10,6 +10,9 @@ let nicknames;
 chrome.storage.local.get(['nicknames'], (result) => {
 	nicknames = result.nicknames;
 });
+
+const RIT_SCHOOL_ID = "U2Nob29sLTgwNw=="
+
 let head = document.getElementsByTagName("head")[0];
 
 let csses = ["tippy.css", "light.css", "content.css"];
@@ -32,7 +35,7 @@ selectors.forEach((selector) => {
 		let profname = filterNonProfessors(target.textContent.trim());
 		profname = replaceCustomNicknames(profname);
 
-		searchProfessorByName(profname)
+		searchProfessorByName(profname, RIT_SCHOOL_ID)
 		
 	});
 });
