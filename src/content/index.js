@@ -1,4 +1,4 @@
-import { filterNonProfessors, replaceCustomNicknames } from './utils.mjs';
+import { filterNonProfessors, replaceCustomNicknames, createProfessorSearchStrings } from './utils.mjs';
 import RMPProfessorData from "./rmpprofessordata.mjs"
 import browser from "webextension-polyfill";
 
@@ -39,15 +39,17 @@ selectors.forEach((selector) => {
 
 
 /**
- * Given aprofessors name, attempt to look up the correct professor using the RMP API
+ * Given a professors name, attempt to look up the correct professor using the RMP API
  * @param {*} name a professors name to look up
+ * @param {number} [maxTries=5] the maximum number of API calls to make before giving up
  */
-function searchProfessorByName(name) {
+async function searchProfessorByName(name, maxTries=5) {
 
 	// split and standardize the casing in the name
 	const splitName = name.split(' ').map((part) => part.toLowerCase().trim());
 	
 	let searchStrings = createProfessorSearchStrings(splitName)
+	searchStrings = searchStrings.slice(0, maxTries)
 
 }
 function linkProfessor(target, results) {
