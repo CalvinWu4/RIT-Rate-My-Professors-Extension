@@ -46,6 +46,11 @@ selectors.forEach((selector) => {
  */
 async function searchProfessorByName(name, schoolId, maxTries=5) {
 
+	//dont make a query if there was no valid name to use
+	if (!name || name == ""){
+		return Promise.reject("no name was provided when searching for a professor name")
+	}
+
 	// split and standardize the casing in the name
 	const splitName = name.split(' ').map((part) => part.toLowerCase().trim());
 	
