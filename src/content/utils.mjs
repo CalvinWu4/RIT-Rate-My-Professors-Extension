@@ -52,12 +52,17 @@ function combinations(array) {
 }
 
 
+function isSurnameParticle(value) {
+ return surnameParticles.includes(value.toLowerCase())
+}
+
+
 export function getNameCombos(nameArray) {
 	nameArray = combinations(nameArray);
 
 	// Filter out name combos that only contain surname particles
 	function isSubset(arr) {
-		return arr.every((val) => surnameParticles.includes(val.toLowerCase()));
+		return arr.every((val) => isSurnameParticle(val));
 	}
 
 	return nameArray.filter((combo) => !isSubset(combo));
