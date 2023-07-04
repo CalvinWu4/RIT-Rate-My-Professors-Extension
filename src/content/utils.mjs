@@ -72,14 +72,15 @@ export function getNameCombos(nameArray) {
 /**
  * Given a list of name parts (i.e. first, some number of middle names, and last), return an ordered list of strings built from those components sorted by most likely to be a match
  * @param {*} nameComponents a list of strings representing name parts, i.e. ['Tom', 'Holland']
+ * @param {*} nicknames an object mapping a full name to a series of nicknames commonly used to refer to people of that name
  */
-function createProfessorSearchStrings(nameComponents) {
+export function createProfessorSearchStrings(nameComponents, nicknames) {
 
-	const firstName = splitName[0];
-	const lastName = splitName[splitName.length - 1];
+	const firstName = nameComponents[0];
+	const lastName = nameComponents[splitName.length - 1];
 	let middleNames = []
 	if (splitName.length > 2) {
-		middleNames = splitName.slice(1, splitName.length - 1);
+		middleNames = nameComponents.slice(1, nameComponents.length - 1);
 	}
 
 	let nonParticleMiddleNames = middleNames.filter((name) => !isSurnameParticle(val))
@@ -88,5 +89,39 @@ function createProfessorSearchStrings(nameComponents) {
 
 	// [First Name] [Last Name]
 	searchStrings.push(`${firstName} ${lastName}`)
+
+	// [First Middle Name (that is not a surname particle)] [Last Name]
+	// [Second Middle Name (that is not a surname particle)] [Last Name]
+	// ..etc
+
+	let middleNameSearchCombinations = nonParticleMiddleNames.map((middleName) => `${middleName} ${lastName}`)
+
+	//If desired, apply a limit or split/interleave the list with other items to keep the most likely search results on top
+	// middleNameSearchCombinations = middleNameSearchCombinations.slice(0, 3)
+
+	searchStrings.push(...middleNameSearchCombinations)
+
+	// [try all nicknames for First Name] [Last Name]
+	let firstNickSearchCombinations = nicknames[firstName].map((nick) => searchStrings.push(`${nick} ${lastName}`))
+
+	searchStrings.push(...firstNickSearchCombinations)
+
+	// [try all nicknames for First Middle Name (that is not a surname particle)] [Last Name]
+	// [try all nicknames for Second Middle Name (that is not a surname particle)] [Last Name]
+	// ..etc
+
+	let middleNickNameSearchCombinations = []
+	
+	for (const middleName of nonParticleMiddleNames) {
+		middleNameSearchCombinations.push(
+			nicknames[middleName].map((middleNick) => `${middleNick} ${lastName}`)
+		)
+	}
+
+	//If desired, apply a limit or split/interleave the list with other items to keep the most likely search results on top
+	// middleNickNameSearchCombinations = middleNickNameSearchCombinations.slice(0, 3)
+
+	searchStrings.push(...middleNickNameSearchCombinations)
+
 	return searchStrings
 }
