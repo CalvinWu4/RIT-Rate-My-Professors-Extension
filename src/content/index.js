@@ -31,34 +31,25 @@ selectors.forEach((selector) => {
 	document.arrive(selector, function (target) {
 		let profname = filterNonProfessors(target.textContent.trim());
 		profname = replaceCustomNicknames(profname);
-		const splitName = profname.split(' ');
-		const firstName = splitName[0].toLowerCase().trim();
-		const lastName = splitName.slice(-1)[0].toLowerCase().trim();
-		let middleNames = [];
-		let originalMiddleNames = [];
-		if (splitName.length > 2) {
-			middleNames = [...splitName.slice(1, splitName.length - 1).map((name) => name.toLowerCase().trim())];
-			originalMiddleNames = [...middleNames];
-		}
-		// Try with no middle names at first
-		const tryMiddleNames = false;
-		const tryNicknames = true;
-		const tryMiddleAndLastNameCombos = true;
-		const originalFirstName = firstName;
-		const originalLastName = lastName;
-		const nicknamesIndex = 0;
-		const middleAndLastNameCombosIndex = 0;
-		const tryMiddleNameAsFirst = true;
 
-		//dont make a query if there was no valid name to use
-		if (profname != "") {
-			// Query Rate My Professor with the professor's name
-			GetProfessorRating(`${firstName} ${lastName}`).then((results) => linkProfessor(target, results))
-		}
+		searchProfessorByName(profname)
+		
 	});
 });
 
 
+/**
+ * Given aprofessors name, attempt to look up the correct professor using the RMP API
+ * @param {*} name a professors name to look up
+ */
+function searchProfessorByName(name) {
+
+	// split and standardize the casing in the name
+	const splitName = name.split(' ').map((part) => part.toLowerCase().trim());
+	
+	let searchStrings = createProfessorSearchStrings(splitName)
+
+}
 function linkProfessor(target, results) {
 	if (results.length == 0) {
 		//retry some other names on the list
