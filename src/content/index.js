@@ -49,7 +49,7 @@ async function searchProfessorByName(name, schoolId, maxTries=5) {
 	// split and standardize the casing in the name
 	const splitName = name.split(' ').map((part) => part.toLowerCase().trim());
 	
-	let searchStrings = createProfessorSearchStrings(splitName)
+	let searchStrings = createProfessorSearchStrings(splitName, nicknames)
 	searchStrings = searchStrings.slice(0, maxTries)
 
 	return searchForProfessor(searchStrings, schoolId)
