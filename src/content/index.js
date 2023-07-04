@@ -52,14 +52,25 @@ async function searchProfessorByName(name, maxTries=5) {
 	searchStrings = searchStrings.slice(0, maxTries)
 
 }
-function linkProfessor(target, results) {
-	if (results.length == 0) {
-		//retry some other names on the list
 
-		//eventually this may be a no professor found situation
+function linkProfessor(element, results, lastName, schoolId) {
+	element.setAttribute('target', '_blank');
+	element.classList.add('blueText');
+	element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
+
+
+	if (results.length == 0) {
+		//not found
+		element.textContent += ` (NF)`;
+		element.setAttribute('href', `https://www.ratemyprofessors.com/search/professors?q=${lastName}&sid=${schoolId}`);
+		
 	} else if (results.length >= 1) {
 		let profData = results[0]
-		displaySingleProfRating(target, profData);
+		//if found
+		element.textContent += ` (${profData.getQualityRatingString()})`;
+		element.setAttribute('href', profData.getURL());
+
+		setupSingleProfToolTip(element, profData);
 	}
 
 }
@@ -158,21 +169,6 @@ function normalizeGraphQLData(data) {
 	data = data.map((value) => RMPProfessorData.fromGraphQL(value.node));
 	return data;
 
-}
-
-
-///assumes that there is one prof data object provided
-function displaySingleProfRating(element, profData) {
-
-	element.setAttribute('target', '_blank');
-	element.classList.add('blueText');
-	element.parentElement && element.parentElement.classList.add('classSearchBasicResultsText');
-
-
-	element.textContent += ` (${profData.getQualityRatingString()})`;
-	element.setAttribute('href', profData.getURL());
-
-	setupSingleProfToolTip(element, profData);
 }
 
 function createToolTipElement(textContent, isTitle = false) {
