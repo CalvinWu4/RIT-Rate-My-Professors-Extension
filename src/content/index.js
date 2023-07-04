@@ -53,6 +53,47 @@ async function searchProfessorByName(name, maxTries=5) {
 
 }
 
+/**
+ * Run a series of searches using the RateMyProfessors API until one comes back with data
+ * 
+ * 
+ * @param {*} searches a list of search terms to, the length of this array determines the number of attempts that will be made
+ * @param {string} schoolId a base64 school ID to limit searches to
+ * @param {number} [delayms=500] the number of milliseconds to delay between subsequent requests to help respect rate limits.
+ */
+async function searchForProfessor(searches, schoolId, delayms=500) {
+	//https://stackoverflow.com/a/38225011
+
+
+	function rejectDelay(reason) {
+		return new Promise(function(resolve, reject) {
+			setTimeout(reject.bind(null, reason), delayms); 
+		});
+	}
+
+	function testReturnedData(val) {
+		//TODO: check for 429 HTTP status for exceeded rate limits
+		if(val.length == 0) {
+			throw val;
+		} else {
+			return val;
+		}
+	}
+
+	function generateAttempt(search, schoolId) {
+		return (reason) => GetProfessorRating(search, schoolId)
+	}
+
+	var p = Promise.reject();
+
+	for (const search of searches) {
+		p = p.catch(generateAttempt(search, schoolId)).then(testReturnedData).catch(rejectDelay);
+		// Don't be tempted to simplify this to `p.catch(attempt).then(test, rejectDelay)`. Test failures would not be caught.
+	}
+	return p
+}
+
+
 function linkProfessor(element, results, lastName, schoolId) {
 	element.setAttribute('target', '_blank');
 	element.classList.add('blueText');
