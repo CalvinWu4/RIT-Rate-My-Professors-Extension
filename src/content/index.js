@@ -35,7 +35,18 @@ selectors.forEach((selector) => {
 		let profname = filterNonProfessors(target.textContent.trim());
 		profname = replaceCustomNicknames(profname);
 
+		let lastName = profname.split(' ')
+		lastName = lastName[lastName.length - 1]
+
 		searchProfessorByName(profname, RIT_SCHOOL_ID)
+			.then((results) => linkProfessor(target, results, lastName, RIT_SCHOOL_ID))
+			.catch((errorReason) => {
+					// if no luck, then provide a link with just [Last Name]
+					console.error(errorReason)
+					linkProfessor(target, [], lastName, RIT_SCHOOL_ID)
+					return
+				}
+			)
 		
 	});
 });
