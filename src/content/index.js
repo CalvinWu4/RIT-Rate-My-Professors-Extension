@@ -39,11 +39,12 @@ selectors.forEach((selector) => {
 
 
 /**
- * Given a professors name, attempt to look up the correct professor using the RMP API
+ * Given a professors name as a regular string, attempt to look up the correct professor using the RMP API
  * @param {*} name a professors name to look up
+ * @param {string} schoolId (optional) the base64 RateMyProfessors school ID to limit the search to 
  * @param {number} [maxTries=5] the maximum number of API calls to make before giving up
  */
-async function searchProfessorByName(name, maxTries=5) {
+async function searchProfessorByName(name, schoolId, maxTries=5) {
 
 	// split and standardize the casing in the name
 	const splitName = name.split(' ').map((part) => part.toLowerCase().trim());
@@ -51,6 +52,7 @@ async function searchProfessorByName(name, maxTries=5) {
 	let searchStrings = createProfessorSearchStrings(splitName)
 	searchStrings = searchStrings.slice(0, maxTries)
 
+	return searchForProfessor(searchStrings, schoolId)
 }
 
 /**
