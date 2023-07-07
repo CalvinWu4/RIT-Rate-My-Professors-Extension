@@ -124,7 +124,10 @@ function linkProfessor(element, results, lastName, schoolId) {
 	if (results.length == 0) {
 		//not found
 		element.textContent += ` (NF)`;
-		element.setAttribute('href', `https://www.ratemyprofessors.com/search/professors?q=${lastName}&sid=${schoolId}`);
+		//check if the element already is a ratemyprofessors link and if so, leave it alone
+		if (!element.href.toLowerCase().includes("ratemyprofessors.com")){
+			element.setAttribute('href', `https://www.ratemyprofessors.com/search/professors?q=${lastName}&sid=${schoolId}`);
+		}
 		
 	} else if (results.length >= 1) {
 		let profData = results[0]
