@@ -23,10 +23,10 @@
   "scripts": {
     "clean": "rm -rf build/*; rm -rf dist/*",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
-    "build:chrome": "NODE_ENV=production webpack --env browser=chrome --config webpack.config.mjs",
-    "build:firefox": "NODE_ENV=production webpack --env browser=firefox --config webpack.config.mjs",
-    "build-dev:chrome": "NODE_ENV=development webpack --env browser=chrome --config webpack.config.mjs",
-    "build-dev:firefox": "NODE_ENV=development webpack --env browser=firefox --config webpack.config.mjs",
+    "build:chrome": "webpack --env browser=chrome --env production --config webpack.config.mjs",
+    "build:firefox": "webpack --env browser=firefox --env production --config webpack.config.mjs",
+    "build-dev:chrome": "webpack --env browser=chrome --env development --mode development --config webpack.config.mjs",
+    "build-dev:firefox": "webpack --env browser=firefox --env development --mode development --config webpack.config.mjs",
     "release": "npm run clean && npm run build:chrome && npm run build:firefox"
   },
   "repository": {

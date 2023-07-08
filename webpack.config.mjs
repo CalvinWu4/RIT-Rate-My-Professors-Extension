@@ -104,7 +104,7 @@ export default function (env) {
 				buildPackage: true,
 				overwriteDest: true,
 				ignoreKnownChromeLintFailures: true,
-				outputFilename: `${pkgjson.name}_${pkgjson.version}_${env.browser === 'firefox' ? "firefox" : "chrome"}${!env.production?"_DEV":""}.zip`
+				outputFilename: `${pkgjson.name}_${pkgjson.version}_${env.browser === 'firefox' ? "firefox" : "chrome"}${env.production?"":"_DEV"}.zip`
 			})
 		],
 
