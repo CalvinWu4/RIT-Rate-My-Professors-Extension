@@ -1,0 +1,69 @@
+{
+	"manifest_version": 3,
+	"name": "will be filled in by webpack from package.json",
+	"version": "will be filled in by webpack from package.json",
+	"description": "will be filled in by webpack from package.json",
+	"author": "will be filled in by webpack from package.json",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{2f9f4409-05af-4441-82f0-13a3449dd1e6}",
+			"strict_min_version": "101.0"
+		}
+	},
+	"host_permissions": [
+		"https://ratemyprofessors.com/graphql",
+		"https://www.ratemyprofessors.com/graphql",
+		"https://raw.githubusercontent.com/carltonnorthern/nickname-and-diminutive-names-lookup/master/names.csv/",
+		"webRequest"
+	],
+	"permissions": [
+		"storage"
+	],
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"./tippy.css",
+				"./light.css",
+				"./content.css",
+				"./content.bundle.js.map",
+				"./background.bundle.js.map",
+				"./background.bundle.js.LICENSE.txt"
+			],
+			"matches": [
+				"https://tigercenter.rit.edu/*",
+				"https://schedulemaker.csh.rit.edu/*",
+				"https://schedule.csh.rit.edu/*"
+			],
+			"use_dynamic_url": true
+		}
+	],
+	"content_scripts": [
+		{
+			"js": [
+				"./content.bundle.js"
+			],
+			"css": [
+				"./tippy.css",
+				"./light.css",
+				"./content.css"
+			],
+			"matches": [
+				"https://tigercenter.rit.edu/tigerCenterApp/api/class-search*",
+				"https://schedulemaker.csh.rit.edu/*",
+				"https://schedule.csh.rit.edu/*"
+			],
+			"run_at": "document_end"
+		}
+	],
+	"background": {
+		"scripts": [
+			"./background.bundle.js"
+		]
+	},
+	"icons": {
+		"16": "./images/16.png",
+		"48": "./images/48.png",
+		"96": "./images/96.png",
+		"128": "./images/128.png"
+	}
+}
